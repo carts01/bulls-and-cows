@@ -21,4 +21,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should create new user" do 
+    assert_difference('User.count', 1) do 
+      post users_path, params: { user: { firstname: "Test", lastname: "User", username: "abcde", email: "abc@def.com", password: "password"} }
+    end
+
+    assert_redirected_to user_path(User.last)
+  end
+
 end
