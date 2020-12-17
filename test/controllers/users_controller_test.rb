@@ -12,7 +12,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new user page" do
-    get new_user_path
+    get '/register'
     assert_response :success
   end
 

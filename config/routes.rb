@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
 
+  resources :games, except: [:edit, :update, :destroy]
+
 end
