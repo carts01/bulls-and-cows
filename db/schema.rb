@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_081641) do
+ActiveRecord::Schema.define(version: 2020_12_17_064041) do
+
+  create_table "games", force: :cascade do |t|
+    t.boolean "win", default: false
+    t.boolean "draw", default: false
+    t.boolean "loss", default: false
+    t.integer "turns"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "firstname"

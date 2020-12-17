@@ -3,3 +3,24 @@
 <p><%= @user.firstname + " " + @user.lastname %></p>
 <p><%= @user.username %></p>
 <p><%= @user.email %></p>
+
+<% win_counter = 0 %>
+<% total_turns = 0 %>
+<% @user.games.each do |game| %>
+  <% if game.win %>
+  <% win_counter += 1 %>
+  <% end %>
+  <% total_turns = game.turns += total_turns %>
+  <p>Win - <%= game.win %></p>
+  <p>Draw - <%= game.draw %></p>
+  <p>Loss - <%= game.loss %></p>
+  <p>Turns - <%= game.turns %></p>
+<% end %>
+
+<p>Total wins - <%= win_counter %></p>
+<p>Average turns per game - <%= total_turns / @user.games.length %></p>
+
+<% if logged_in? && current_user == @user %>
+  <%= link_to "Edit account", edit_user_path(@user), class: 'edit_link' %>
+  <%= link_to "Log out", logout_path, class: 'logout_link' %>
+<% end %>
