@@ -1,0 +1,25 @@
+<% if logged_in? %>
+
+  <%= form_with(model: @game, local: true) do |f| %>
+    <div>
+      <%= f.hidden_field :win, value: true %>
+    </div>
+    <div>
+      <%= f.hidden_field :draw, value: false %>
+    </div>
+    <div>
+      <%= f.hidden_field :loss, value: false %>
+    </div>
+    <div>
+      <%= f.hidden_field :turns, value: 7 %>
+    </div>
+    <div>
+    <%= f.submit 'Save game', disabled: 'disabled' %>
+    </div>
+  <% end %>
+
+<% else %>
+
+<p>Log in to save game</p>
+
+<% end %>

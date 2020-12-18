@@ -1,0 +1,9 @@
+<h1>List of games</h1>
+
+<% @games.each do |game| %>
+  <p>Win - <%= game.win %></p>
+<% end %>
+
+<% @wins.each do |win| %>
+  <p><%= win.user_id %></p>
+<% end %>

@@ -1,12 +1,14 @@
 class GamesController < ApplicationController
 
   before_action :set_game, only: [:show]
+  # before_action :require_user, except: [:show, :index]
 
   def show
   end
 
   def index
     @games = Game.all
+    @wins = Game.where(win: true)
   end
 
   def new
@@ -15,7 +17,10 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    # set game.user to be equal to the current user (from the Session ID)
+    @game.user = current_user
     if @game.save
+      flash[:notice] = "Game saved!"
       redirect_to @game
     else
       render 'new'
