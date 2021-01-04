@@ -1,14 +1,32 @@
-<header class="header">
-  <div class="wrapper">
-    <%= link_to 'Home', root_path, class: 'nav_link' %>
-    <%= link_to 'How to play', instructions_path, class: 'nav_link' %>
-    <%= link_to 'Leaderboard', users_path, class: 'nav_link' %>
-    <% if logged_in? %>
-      <%= link_to 'Log out', logout_path, class: 'nav_link' %>
-    <% else %>
-      <%= link_to 'Log in', login_path, class: 'nav_link' %>
-      <span>or</span>
-      <%= link_to 'Sign up', register_path, class: 'nav_link' %>  
-    <% end %>
-  </div>
+<header class="header green darken-2">
+<nav class="green darken-2">
+    <div class="nav-wrapper">
+     <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li>
+          <%= link_to 'Home', root_path, class: 'nav_link grey-text text-lighten-5' %>
+        </li>
+        <li>
+          <%= link_to 'How to play', instructions_path, class: 'nav_link grey-text text-lighten-5' %>
+        </li>
+        <li>
+          <%= link_to 'Play', play_path, class: 'nav_link grey-text text-lighten-5' %>
+        </li>
+        <li>
+          <%= link_to 'Leaderboard', users_path, class: 'nav_link grey-text text-lighten-5' %>
+        </li>
+        <% if logged_in? %>
+          <li>
+            <%= link_to 'Log out', logout_path, class: 'nav_link grey-text text-lighten-5' %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Log in', login_path, class: 'nav_link grey-text text-lighten-5' %>
+          </li>
+          <li>  
+            <%= link_to 'Sign up', register_path, class: 'nav_link grey-text text-lighten-5' %>  
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 </header>

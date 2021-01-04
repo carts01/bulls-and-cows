@@ -7,13 +7,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
 
     <%= render 'layouts/navigation' %>
 
-    <div class="main-content">
+    <main class="main-content">
 
     <div class="flash-messages">
       <% flash.each do |name, msg| -%>
@@ -22,7 +23,7 @@
     </div>
 
       <%= yield %>
-    </div>
+    </main>
 
     <%= render 'layouts/footer' %>
   </body>
