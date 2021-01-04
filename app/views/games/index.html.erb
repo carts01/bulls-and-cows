@@ -1,9 +1,23 @@
 <h1>List of games</h1>
 
-<% @games.each do |game| %>
-  <p>Win - <%= game.win %></p>
-<% end %>
 
-<% @wins.each do |win| %>
-  <p><%= win.user_id %></p>
-<% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>Game</th>
+        <th>Username</th>
+        <th>Result</th>
+      <tr>
+    </thead>
+    <tbody>
+    <% count = 1 %>
+      <% @games.each do |game| %>
+        <tr>
+          <td><%= count %></td>
+          <td><%= get_game_user(game) %></td>
+          <td><%= get_result(game) %></td>
+        </tr>
+       <% count += 1 %> 
+      <% end %>
+    </tbody>
+  </table>

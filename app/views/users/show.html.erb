@@ -5,14 +5,9 @@
 <p><%= @user.email %></p>
 
 <p>Games played - <%= @games.count %></p>
-<p>Wins - <%= @wins.count %></p>
-<p>Draws - <%= @draws.count %></p>
-<p>Losses - <%= @losses.count %></p>
-
-<% total_turns = 0 %>
-<% @user.games.each do |game| %>
-  <% total_turns = total_turns + game.turns %>
-<% end %>
+<p>Wins - <%= get_wins(@games) %></p>
+<p>Draws - <%= get_draws(@games) %></p>
+<p>Losses - <%= get_losses(@games) %></p>
 
 <table>
   <thead>
@@ -25,15 +20,15 @@
   <thead>
   <tbody>
       <tr>
-        <td><%= @wins.count %></td>
-        <td><%= @draws.count %></td>
-        <td><%= @losses.count %></td>
-        <td><%= (@wins.count / @games.count.to_f).round(2) * 100 %></td>
+        <td><%= get_wins(@games)  %></td>
+        <td><%= get_draws(@games) %></td>
+        <td><%= get_losses(@games)  %></td>
+        <td><%= (get_wins(@games) / @games.count.to_f).round(2) * 100 %></td>
       </tr>
   </tbody>
 </table>
 
-<p>Average turns per game - <%= (total_turns / @user.games.length.to_f).round(2) %></p>
+<p>Average turns per game - <%= (get_total_turns(@games) / @games.length.to_f).round(2) %></p>
 
 <% if logged_in? && current_user == @user %>
   <%= link_to "Edit account", edit_user_path(@user), class: 'edit_link' %>

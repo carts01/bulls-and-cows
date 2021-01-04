@@ -7,6 +7,11 @@
       <th>First Name</th>
       <th>Last Name</th>
       <th>Email</th>
+      <th>Games</th>
+      <th>Wins</th>
+      <th>Draws</th>
+      <th>Losses</th>
+      <th>Win %</th>
     </tr>
   </thead>
   <tbody class="users__table--body">
@@ -16,6 +21,11 @@
         <td><%= user.firstname %></td>
         <td><%= user.lastname %></td>
         <td><%= user.email %></td>
+        <td><%= user.games.count %></td>
+        <td><%= get_wins(user.games) %></td>
+        <td><%= get_draws(user.games) %></td>
+        <td><%= get_losses(user.games) %></td>
+        <td><%= (get_wins(user.games)/ user.games.count.to_f).round(2) * 100 %></td>
       </tr>
     <% end %>
   </tbody>
