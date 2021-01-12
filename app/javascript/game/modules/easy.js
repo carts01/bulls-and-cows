@@ -10,7 +10,7 @@
 
 import Setup from './setup_class';
 import Play from './play';
-import { formatCode, resetTurn } from '../../helpers';
+import { formatCode, resetTurn, finishGame } from '../../helpers';
 
 export default class Easy extends Play {
   
@@ -27,61 +27,41 @@ export default class Easy extends Play {
     this.setup = new Setup();
 
     let turns = 1;
-    // get user guess from DOM and add it to userGuess variable
-    // temporarily disable input in DOM
-    // check bulls and cows
-    // Display results
-    // Repeat for computer guess
-    // Increment turns (and display how many turns gone)
-    // Enable input for next round
 
     const form = document.querySelector('#guessForm');
     const guess = document.querySelector('#userGuess');
-    const userTable = document.querySelector('.players__table--body');
-    const compTable = document.querySelector('.comp__table--body');
+    const resultContainer = document.querySelector('.result-container');
+    const userTable = document.querySelector('.players__table');
+    const compTable = document.querySelector('.comp__table');
     
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       guess.setAttribute('disabled', true);
       let userGuess = formatCode(guess.value);
       let userCount = this.checkCode(userGuess, computerCode, "user");
+      this.displayTableRow(turns, userGuess, userCount, userTable);
+      if (userCount.bullCount == 4) {
+        // End game here and stop computer from guessing
+        finishGame(form, resultContainer, "Player wins");
+        return;
+      }
       let compGuess = this.setup.getComputerCode();
       let compCount = this.checkCode(compGuess, playerCode, "comp");
-      console.log(compCount);
-      console.log('Turns: ' + turns);
-      this.displayTableRow(turns, userGuess, userCount, userTable);
       this.displayTableRow(turns, compGuess, compCount, compTable);
+      if (compCount.bullCount == 4) {
+        // End game here and stop computer from guessing
+        finishGame(form, resultContainer, "Computer wins");
+        return;
+      }
       turns++;
+      if (turns > 7) {
+        finishGame(form, resultContainer, "Draw");
+        return;
+      }
       // Function to wait a second or so
       setTimeout(resetTurn, 1000, guess);
       console.log('1000ms later');
     });
 
-    /*while (turns <= 7) {
-      // User guess
-      // let userGuess = this.setup.getPlayerCode();
-      //let userInput = this.getUserGuess();
-      //console.log(userInput);
-      //let computerCode = computerCode;
-
-      let userGuess = false;
-
-      userGuess = formatCode(document.querySelector('#userGuess').value);
-
-      // Remove from array the codes that have already been guessed
-      //console.log(typeof compGuess);
-      //console.log(typeof numberSet[0]);
-      //const found = numberSet.indexOf(compGuess);
-      //console.log(found);
-      //numberSet.splice(found, 1);
-      //console.log(numberSet.length)
-
-      turns++;
-
-      // End of game (draw)
-      if (turns == 8) {
-        console.log("Draw")
-      }
-    }*/
   }
 }

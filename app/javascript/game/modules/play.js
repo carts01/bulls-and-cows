@@ -1,10 +1,10 @@
 import Setup from './setup_class';
-import { formatGuess } from '../../helpers'
+import { formatGuess, finishGame } from '../../helpers'
 
 export default class Play {
 
   constructor () {
-    
+
   }
 
   playGame(compCode, playerCode) {
@@ -46,6 +46,10 @@ export default class Play {
   }
 
   checkCode(guess, code, player) {
+
+    const form = document.querySelector('#guessForm');
+    const messageContainer = document.querySelector('.message-container');
+
     if (player == "user") {
       let bullCount = this.getBulls(code, guess);
       let cowCount = this.getCows(code, guess);
@@ -53,10 +57,6 @@ export default class Play {
       console.log("Player guess: " + guess);
       console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
       console.log(" ")
-      if (bullCount == 4) {
-        console.log('Player wins');
-        // function to end game
-      } 
       return {
         bullCount,
         cowCount
@@ -68,10 +68,6 @@ export default class Play {
       console.log("Comp guess: " + guess);
       console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
       console.log(" ")
-      if (bullCount == 4) {
-        console.log('Computer wins');
-        // function to end game
-      } 
       return {
         bullCount,
         cowCount
@@ -80,6 +76,10 @@ export default class Play {
   }
 
   displayTableRow(turn, guess, count, table) {
+    if (table.classList.contains('hidden')) {
+      table.classList.remove('hidden');
+    }
+    const tableBody = table.querySelector('tbody');
     const data = [turn, formatGuess(guess), count.bullCount, count.cowCount];
     let tableRow = document.createElement('tr');
     data.forEach((elem) => {
@@ -87,7 +87,7 @@ export default class Play {
       tableData.innerHTML = elem;
       tableRow.appendChild(tableData);
     });
-    table.appendChild(tableRow);
+    tableBody.appendChild(tableRow);
   }
 
 }

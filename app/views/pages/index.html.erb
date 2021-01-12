@@ -1,74 +1,99 @@
 <div class="container">
-<h1>This is the home page</h1>
+    <h1>This is the home page</h1>
 
-<div>
-<form action="" method="get" id="codeForm" class="form-example">
-
-<div class="input-field col s12 m6" style="margin-bottom: 30px;">
-<input type="number" id="userCode" style="max-width: 100px; margin: 0 auto;">
-<label for="userGuess">Choose a code:</label>
-</div>
-
-
-<div class="input-field col s12 m6">
-<select name="pets" id="levelSelect">
-    <option value="easy">Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard">Hard</option>
-</select>
-<label>Choose a level</label>
-</div>
-
-<input type="submit" value="Guess!">
-</form>
-
-<form action="" method="get" id="guessForm" class="form-guess hidden">
-
-<div class="input-field col s12 m6" style="margin-bottom: 30px;">
-<input type="number" id="userGuess" style="max-width: 100px; margin: 0 auto;">
-<label for="userGuess">Guess the code:</label>
-</div>
-
-<input type="submit" value="Guess!">
-</form>
-
-<div class="row">
-    <div class="col s12 m6">
-    <h4>Player Name</h4>
-        <table class="players__table striped centered">
-        <thead class="players__table--head">
-            <tr class="table-row">
-            <th>Round</th>
-            <th>Guess</th>
-            <th>Bulls</th>
-            <th>Cows</th>
-            </tr>
-        </thead>
-        <tbody class="players__table--body">
-
-        </tbody>
-        </table>
+    <div class="row">
+        <form action="" method="get" id="codeForm" class="col s12">
+            <div class="row">
+            <p>Choose a unique four digit code:</p>
+                <div class="input-field col s6" style="margin-bottom: 30px;">
+                    <i class="material-icons prefix">code</i>
+                    <input type="text" id="userCode">
+                    <label for="userCode">Enter code</label>
+                </div>
+            </div>
+            <div class="row">
+            <i class="material-icons">sort</i>
+            <p>Choose a level:</p>
+                <div class="col s12">
+                    <label>
+                    <input name="level-group" type="radio" value="easy" checked />
+                    <span>Easy</span>
+                    </label>
+                    <label>
+                    <input name="level-group" type="radio" value="medium" />
+                    <span>Medium</span>
+                    </label>
+                    <label>
+                    <input name="level-group" type="radio" value="hard" />
+                    <span>Hard</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                <input type="submit" value="Guess!">
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="col s12 m6">
-    <h4>Computer Name</h4>
-        <table class="comp__table striped centered">
-        <thead class="comp__table--head">
-        <tr class="table-row">
-            <th>Round</th>
-            <th>Guess</th>
-            <th>Bulls</th>
-            <th>Cows</th>
-        </tr>
-        </thead>
-        <tbody class="comp__table--body">
 
-        </tbody>
-        </table>
+    <form action="" method="get" id="guessForm" class="form-guess hidden">
+
+        <div class="input-field col s12 m6" style="margin-bottom: 30px;">
+            <input type="text" id="userGuess" placeholder="Enter guess" style="max-width: 100px; margin: 0 auto;">
+            <label for="userGuess">Guess the code:</label>
+        </div>
+
+        <input type="submit" value="Guess!">
+    </form>
+
+    <div class="row">
+        <div class="col s12 m6">
+            <span class="show-user-code"></span>
+        </div>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col s12 m6">
+            <h4>Player Name</h4>
+            <table class="players__table striped centered hidden">
+                <thead class="players__table--head">
+                    <tr class="table-row">
+                        <th>Round</th>
+                        <th>Guess</th>
+                        <th>Bulls</th>
+                        <th>Cows</th>
+                    </tr>
+                </thead>
+                <tbody class="players__table--body">
 
+                </tbody>
+            </table>
+        </div>
+        <div class="col s12 m6">
+            <h4>Computer Name</h4>
+            <table class="comp__table striped centered hidden">
+                <thead class="comp__table--head">
+                    <tr class="table-row">
+                        <th>Round</th>
+                        <th>Guess</th>
+                        <th>Bulls</th>
+                        <th>Cows</th>
+                    </tr>
+                </thead>
+                <tbody class="comp__table--body">
 
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-</div>
+    <div class="result-container">
+
+    </div>
+
+    <div class="reset-container">
+    <button class="play-again hidden" disabled>Play Again</button>
+    </div>
+
 </div>

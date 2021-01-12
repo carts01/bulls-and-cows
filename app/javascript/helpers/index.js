@@ -28,3 +28,19 @@ export function resetTurn(input) {
   input.removeAttribute('disabled');
   input.value = '';
 }
+
+export function finishGame(form, element, message) {
+  form.classList.add('hidden');
+  element.textContent = message;
+  const playAgain = document.querySelector('.play-again');
+  playAgain.classList.remove('hidden');
+  playAgain.removeAttribute('disabled');
+}
+
+export function getRadioValue(element) {
+  for (let i = 0; i < element.length; i++) {
+    if (element[i].checked) {
+      return element[i].value;
+    }
+  }
+}
