@@ -49,6 +49,8 @@ class Play {
 
     if (level == 1) {
       console.log("easy level selected");
+      document.querySelector('#codeForm').classList.add('hidden');
+      document.querySelector('#guessForm').classList.remove('hidden');
       easy.playGame(numberSet, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");

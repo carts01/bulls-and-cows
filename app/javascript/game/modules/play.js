@@ -1,4 +1,5 @@
 import Setup from './setup_class';
+import { formatGuess } from '../../helpers'
 
 export default class Play {
 
@@ -42,6 +43,51 @@ export default class Play {
     }
 
     return cowCount;
+  }
+
+  checkCode(guess, code, player) {
+    if (player == "user") {
+      let bullCount = this.getBulls(code, guess);
+      let cowCount = this.getCows(code, guess);
+      console.log("-------Player----------")
+      console.log("Player guess: " + guess);
+      console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
+      console.log(" ")
+      if (bullCount == 4) {
+        console.log('Player wins');
+        // function to end game
+      } 
+      return {
+        bullCount,
+        cowCount
+      }
+    } else if (player == "comp") {
+      let bullCount = this.getBulls(code, guess);
+      let cowCount = this.getCows(code, guess);
+      console.log("-------Computer----------")
+      console.log("Comp guess: " + guess);
+      console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
+      console.log(" ")
+      if (bullCount == 4) {
+        console.log('Computer wins');
+        // function to end game
+      } 
+      return {
+        bullCount,
+        cowCount
+      }
+    }
+  }
+
+  displayTableRow(turn, guess, count, table) {
+    const data = [turn, formatGuess(guess), count.bullCount, count.cowCount];
+    let tableRow = document.createElement('tr');
+    data.forEach((elem) => {
+      let tableData = document.createElement('td');
+      tableData.innerHTML = elem;
+      tableRow.appendChild(tableData);
+    });
+    table.appendChild(tableRow);
   }
 
 }

@@ -8,6 +8,12 @@ export function formatCode(code) {
   return codeArray;
 }
 
+export function formatGuess(guess) {
+  //const digits = guess.split(',');
+  const number = guess.join('');
+  return number;
+}
+
 export function levelSelection(choice) {
   if (choice == "easy") {
     return 1;
@@ -16,4 +22,9 @@ export function levelSelection(choice) {
   } else if (choice == "hard") {
     return 3;
   }
+}
+
+export function resetTurn(input) {
+  input.removeAttribute('disabled');
+  input.value = '';
 }

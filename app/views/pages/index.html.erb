@@ -1,6 +1,7 @@
+<div class="container">
 <h1>This is the home page</h1>
 
-<div style="margin-left: 30px;">
+<div>
 <form action="" method="get" id="codeForm" class="form-example">
 
 <div class="input-field col s12 m6" style="margin-bottom: 30px;">
@@ -11,7 +12,6 @@
 
 <div class="input-field col s12 m6">
 <select name="pets" id="levelSelect">
-    <option value="">--Please choose an option--</option>
     <option value="easy">Easy</option>
     <option value="medium">Medium</option>
     <option value="hard">Hard</option>
@@ -21,4 +21,54 @@
 
 <input type="submit" value="Guess!">
 </form>
+
+<form action="" method="get" id="guessForm" class="form-guess hidden">
+
+<div class="input-field col s12 m6" style="margin-bottom: 30px;">
+<input type="number" id="userGuess" style="max-width: 100px; margin: 0 auto;">
+<label for="userGuess">Guess the code:</label>
+</div>
+
+<input type="submit" value="Guess!">
+</form>
+
+<div class="row">
+    <div class="col s12 m6">
+    <h4>Player Name</h4>
+        <table class="players__table striped centered">
+        <thead class="players__table--head">
+            <tr class="table-row">
+            <th>Round</th>
+            <th>Guess</th>
+            <th>Bulls</th>
+            <th>Cows</th>
+            </tr>
+        </thead>
+        <tbody class="players__table--body">
+
+        </tbody>
+        </table>
+    </div>
+    <div class="col s12 m6">
+    <h4>Computer Name</h4>
+        <table class="comp__table striped centered">
+        <thead class="comp__table--head">
+        <tr class="table-row">
+            <th>Round</th>
+            <th>Guess</th>
+            <th>Bulls</th>
+            <th>Cows</th>
+        </tr>
+        </thead>
+        <tbody class="comp__table--body">
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+</div>
 </div>
