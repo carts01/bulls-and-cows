@@ -29,9 +29,9 @@ export function resetTurn(input) {
   input.value = '';
 }
 
-export function finishGame(form, element, message) {
+export function finishGame(form, element, message, playerCode, compCode) {
   form.classList.add('hidden');
-  element.textContent = message;
+  element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;
   const playAgain = document.querySelector('.play-again');
   playAgain.classList.remove('hidden');
   playAgain.removeAttribute('disabled');
@@ -43,4 +43,36 @@ export function getRadioValue(element) {
       return element[i].value;
     }
   }
+}
+
+export function validateCode(code, element, input) {
+  const numericOnly = /\d{4}/;
+  const validLength = 4;
+  const seenValues = {};
+  // Check if code is four digits long
+  if (code.length != validLength) {
+    displayErrorMessage(element, "Code must be four digits in length", input);
+    return false;
+  }
+  // Check if code is only digits
+  if (!numericOnly.test(code)) {
+    displayErrorMessage(element, "Code can only contain numeric digits", input);
+    return false;
+  }
+  // Check if code is made of unique digits
+  for (let i = 0; i < code.length; i++) {
+    if (seenValues[code.charAt(i)]) {
+      displayErrorMessage(element, "Code must contain four unique digits", input);
+      return false;
+    } else {
+      seenValues[code.charAt(i)] = true;
+    }
+  }
+  return true;
+}
+
+export function displayErrorMessage(element, message, input) {
+  element.textContent = message;
+  element.classList.remove('hidden');
+  input.classList.add('invalid');
 }

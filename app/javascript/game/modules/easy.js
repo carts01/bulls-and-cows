@@ -10,7 +10,7 @@
 
 import Setup from './setup_class';
 import Play from './play';
-import { formatCode, resetTurn, finishGame } from '../../helpers';
+import { formatCode, resetTurn, finishGame, validateCode, formatGuess } from '../../helpers';
 
 export default class Easy extends Play {
   
@@ -31,18 +31,24 @@ export default class Easy extends Play {
     const form = document.querySelector('#guessForm');
     const guess = document.querySelector('#userGuess');
     const resultContainer = document.querySelector('.result-container');
+    const errorContainer = document.querySelector('.guess-error');
     const userTable = document.querySelector('.players__table');
     const compTable = document.querySelector('.comp__table');
     
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       guess.setAttribute('disabled', true);
+      const validCode = validateCode(guess.value, errorContainer, guess);
+      if (validCode == false) {
+        setTimeout(resetTurn, 100, guess);
+        return;
+      }
       let userGuess = formatCode(guess.value);
       let userCount = this.checkCode(userGuess, computerCode, "user");
       this.displayTableRow(turns, userGuess, userCount, userTable);
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        finishGame(form, resultContainer, "Player wins");
+        finishGame(form, resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       let compGuess = this.setup.getComputerCode();
@@ -50,12 +56,12 @@ export default class Easy extends Play {
       this.displayTableRow(turns, compGuess, compCount, compTable);
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        finishGame(form, resultContainer, "Computer wins");
+        finishGame(form, resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       turns++;
       if (turns > 7) {
-        finishGame(form, resultContainer, "Draw");
+        finishGame(form, resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       // Function to wait a second or so
