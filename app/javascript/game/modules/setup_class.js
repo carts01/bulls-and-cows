@@ -9,8 +9,16 @@ export default class Setup {
     return {
       computerCode: this.getComputerCode(),
       playerCode: this.getPlayerCode(),
-      numberSet: this.createNumberSet()
+      numberSet: this.createNumberSet(),
+      computerPlayer: this.generateComputerPlayer()
     }
+  }
+
+  generateComputerPlayer() {
+    const players = ["Lionel", "Alice", "Bruce", "Jacob", "Judy", "Eric", "Leroy", "Sandra", "Mary"];
+    const random = Math.floor(Math.random() * Math.floor(players.length));
+    console.log(random);
+    return players[random];
   }
 
   createNumberSet() {

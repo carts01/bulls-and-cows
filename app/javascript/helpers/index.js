@@ -75,4 +75,13 @@ export function displayErrorMessage(element, message, input) {
   element.textContent = message;
   element.classList.remove('hidden');
   input.classList.add('invalid');
+
+  setTimeout(clearError, 3000);
+
+  function clearError() {
+    element.textContent = '';
+    element.classList.add('hidden');
+    input.classList.remove('invalid');
+    input.value = '';
+  }
 }

@@ -4,6 +4,14 @@
     <div class="row">
         <form action="" method="get" id="codeForm" class="col s12">
             <div class="row">
+            <p>Enter your name:</p>
+                <div class="input-field col s6" style="margin-bottom: 30px;">
+                    <input type="text" id="userName" class="validate" required>
+                    <label for="userName">Enter name</label>
+                    <span class="error code-error hidden"></span>
+                </div>
+            </div>
+            <div class="row">
             <p>Choose a unique four digit code:</p>
                 <div class="input-field col s6" style="margin-bottom: 30px;">
                     <input type="text" id="userCode" class="validate" required>
@@ -39,7 +47,7 @@
     <form action="" method="get" id="guessForm" class="form-guess hidden">
 
         <div class="input-field col s12 m6" style="margin-bottom: 30px;">
-            <input type="text" id="userGuess" placeholder="Enter guess" required>
+            <input type="text" id="userGuess" class="validate" required>
             <label for="userGuess">Guess the code:</label>
             <span class="error guess-error hidden"></span>
         </div>
@@ -54,8 +62,9 @@
     </div>
 
     <div class="row">
+    <div class="results">
         <div class="col s12 m6">
-            <h4>Player Name</h4>
+            <h4 class="players__table--name"></h4>
             <table class="players__table striped centered hidden">
                 <thead class="players__table--head">
                     <tr class="table-row">
@@ -71,7 +80,7 @@
             </table>
         </div>
         <div class="col s12 m6">
-            <h4>Computer Name</h4>
+            <h4 class="comp__table--name"></h4>
             <table class="comp__table striped centered hidden">
                 <thead class="comp__table--head">
                     <tr class="table-row">
@@ -85,6 +94,7 @@
 
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
 
