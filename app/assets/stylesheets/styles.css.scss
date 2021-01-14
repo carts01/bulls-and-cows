@@ -22,6 +22,13 @@ main {
 }
 
 .svg-icon {
-  height: 36px;
-  width: 36px;
+  height: 28px;
+  width: 28px;
+}
+
+.players__table--body, .comp__table--body {
+  td {
+    vertical-align: middle;
+    width: 25%;
+  }
 }

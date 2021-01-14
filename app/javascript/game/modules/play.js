@@ -75,12 +75,12 @@ export default class Play {
     }
   }
 
-  displayTableRow(turn, guess, count, table) {
+  displayTableRow(turn, guess, icons, table) {
     if (table.classList.contains('hidden')) {
       table.classList.remove('hidden');
     }
     const tableBody = table.querySelector('tbody');
-    const data = [turn, formatGuess(guess), count.bullCount, count.cowCount];
+    const data = [turn, formatGuess(guess), icons.bulls.innerHTML, icons.cows.innerHTML];
     let tableRow = document.createElement('tr');
     data.forEach((elem) => {
       let tableData = document.createElement('td');

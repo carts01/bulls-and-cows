@@ -10,7 +10,7 @@
 
 import Setup from './setup_class';
 import Play from './play';
-import { formatCode, resetTurn, finishGame, validateCode, formatGuess } from '../../helpers';
+import { formatCode, resetTurn, finishGame, validateCode, formatGuess, displayIcons } from '../../helpers';
 
 export default class Easy extends Play {
   
@@ -45,7 +45,8 @@ export default class Easy extends Play {
       }
       let userGuess = formatCode(guess.value);
       let userCount = this.checkCode(userGuess, computerCode, "user");
-      this.displayTableRow(turns, userGuess, userCount, userTable);
+      let userIcons = displayIcons(userCount.bullCount, userCount.cowCount);
+      this.displayTableRow(turns, userGuess, userIcons, userTable);
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
         finishGame(form, resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
@@ -53,7 +54,8 @@ export default class Easy extends Play {
       }
       let compGuess = this.setup.getComputerCode();
       let compCount = this.checkCode(compGuess, playerCode, "comp");
-      this.displayTableRow(turns, compGuess, compCount, compTable);
+      let compIcons = displayIcons(compCount.bullCount, compCount.cowCount);
+      this.displayTableRow(turns, compGuess, compIcons, compTable);
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
         finishGame(form, resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));

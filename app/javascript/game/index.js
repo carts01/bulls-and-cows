@@ -15,7 +15,7 @@ const NO = 2;
 
 class Play {
   
-  start(userCode, levelCode, userName) {
+  start(userCode, levelCode) {
 
     const setup = new Setup();
     let comp = setup.getComputerCode();
@@ -41,7 +41,7 @@ class Play {
       document.querySelector('#guessForm').classList.remove('hidden');
       document.querySelector('.show-user-code').textContent = userCode;
       document.querySelector('.comp__table--name').textContent = computerName;
-      document.querySelector('.players__table--name').textContent = userName;
+      document.querySelector('.players__table--name').textContent = 'Player X';
       easy.playGame(numberSet, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");
@@ -62,20 +62,6 @@ document.addEventListener('turbolinks:load', function() {
   const playAgain = document.querySelector('.play-again');
   const radioLevel = document.querySelectorAll('[name="level-group"]');
 
-  // Create images and then output them in results table
-  // Use a loop to determine how many to show
-  var bullImage = document.createElement("img"); 
-  bullImage.src = bullSVG; 
-  bullImage.classList.add('svg-icon');
-  var cowImage = document.createElement("img"); 
-  cowImage.src = cowSVG; 
-  cowImage.classList.add('svg-icon');
-
-  var src = document.querySelector(".page-footer"); 
-
-  src.appendChild(bullImage);
-  src.appendChild(cowImage);
-
   /*
   codeInput.addEventListener('keyup', (event) => {
     const validCode = validateCode(event.target.value, errorContainer, codeInput);
@@ -90,15 +76,15 @@ document.addEventListener('turbolinks:load', function() {
     event.preventDefault();
     // This needs to be fixed up
     // const levelCode = event.target[2].value;
+    // Add name field?
     const levelCode = getRadioValue(radioLevel);
     console.log(event);
-    const userName = event.target[0].value;
-    const userCode = event.target[1].value;
+    const userCode = event.target[0].value;
     const validCode = validateCode(userCode, errorContainer, codeInput);
     if (validCode == false) {
       return;
     } else {
-      game.start(userCode, levelCode, userName);
+      game.start(userCode, levelCode);
     }
   });
   playAgain.addEventListener('click', (event) => {

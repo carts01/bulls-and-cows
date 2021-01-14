@@ -1,3 +1,6 @@
+import bullSVG from '../images/bull.svg';
+import cowSVG from '../images/sacred-cow.svg';
+
 export function formatCode(code) {
   const digits = code.split('');
   const codeArray = [];
@@ -84,4 +87,42 @@ export function displayErrorMessage(element, message, input) {
     input.classList.remove('invalid');
     input.value = '';
   }
+}
+
+export function displayIcons(bullCount, cowCount) {
+  // Create images and then output them in results table
+  // Use a loop to determine how many to show
+  const bullList = document.createElement('div');
+  const bullIcons = document.createElement('div');
+  for (let i = 0; i < bullCount; i++) {
+    var bullImage = document.createElement("img"); 
+    bullImage.src = bullSVG; 
+    bullImage.classList.add('svg-icon');
+    bullIcons.appendChild(bullImage);
+  }
+
+  const cowList = document.createElement('div');
+  const cowIcons = document.createElement('div');
+  for (let i = 0; i < cowCount; i++) {
+    var cowImage = document.createElement("img"); 
+    cowImage.src = cowSVG; 
+    cowImage.classList.add('svg-icon');
+    cowIcons.appendChild(cowImage);
+  }
+
+  bullList.appendChild(bullIcons);
+  cowList.appendChild(cowIcons);
+  return {
+    bulls: bullList,
+    cows: cowList
+   }
+
+  //var cowImage = document.createElement("img"); 
+  //cowImage.src = cowSVG; 
+  //cowImage.classList.add('svg-icon');
+
+  //var src = document.querySelector(".page-footer"); 
+
+  //src.appendChild(bullImage);
+  //src.appendChild(cowImage);
 }
