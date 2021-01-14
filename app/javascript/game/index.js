@@ -1,7 +1,7 @@
 import Easy from './modules/easy';
 // import { setup } from './modules/setup_module';
 import Setup from './modules/setup_class';
-import { formatCode, levelSelection, getRadioValue, validateCode } from '../helpers/index';
+import { formatCode, levelSelection, getRadioValue, validateCode, capitalize } from '../helpers/index';
 
 import bullSVG from '../images/bull.svg';
 import cowSVG from '../images/sacred-cow.svg';
@@ -22,8 +22,9 @@ class Play {
     let numberSet = setup.createNumberSet();
     let player = formatCode(userCode);
     let level = levelSelection(levelCode);
-
-    let computerName = setup.generateComputerPlayer();
+    const computerName = capitalize(levelCode);
+    console.log(computerName);
+    //let computerName = setup.generateComputerPlayer();
 
     console.log(comp);
     console.log(numberSet.size);
@@ -39,7 +40,8 @@ class Play {
       console.log("easy level selected");
       document.querySelector('#codeForm').classList.add('hidden');
       document.querySelector('#guessForm').classList.remove('hidden');
-      document.querySelector('.show-user-code').textContent = userCode;
+      document.querySelector('.show-user-code').textContent = `Your secret code is ${userCode}`;
+      // document.querySelector('.show-comp-name').textContent = `You are playing against ${computerName}`;
       document.querySelector('.comp__table--name').textContent = computerName;
       document.querySelector('.players__table--name').textContent = 'Player X';
       easy.playGame(numberSet, comp, player);
@@ -79,7 +81,7 @@ document.addEventListener('turbolinks:load', function() {
     // Add name field?
     const levelCode = getRadioValue(radioLevel);
     console.log(event);
-    const userCode = event.target[0].value;
+    const userCode = event.target[1].value;
     const validCode = validateCode(userCode, errorContainer, codeInput);
     if (validCode == false) {
       return;

@@ -1,6 +1,9 @@
 import Setup from './setup_class';
 import { formatGuess, finishGame } from '../../helpers'
 
+import bullSVG from '../../images/bull.svg';
+import cowSVG from '../../images/sacred-cow.svg';
+
 export default class Play {
 
   constructor () {
@@ -88,6 +91,43 @@ export default class Play {
       tableRow.appendChild(tableData);
     });
     tableBody.appendChild(tableRow);
+  }
+
+  displayIcons(bullCount, cowCount) {
+    // Create images and then output them in results table
+    // Use a loop to determine how many to show
+    const bullList = document.createElement('div');
+    const bullIcons = document.createElement('div');
+    for (let i = 0; i < bullCount; i++) {
+      var bullImage = document.createElement("img"); 
+      bullImage.src = bullSVG; 
+      bullImage.classList.add('svg-icon');
+      bullIcons.appendChild(bullImage);
+    }
+  
+    const cowList = document.createElement('div');
+    const cowIcons = document.createElement('div');
+    for (let i = 0; i < cowCount; i++) {
+      var cowImage = document.createElement("img"); 
+      cowImage.src = cowSVG; 
+      cowImage.classList.add('svg-icon');
+      cowIcons.appendChild(cowImage);
+    }
+  
+    bullList.appendChild(bullIcons);
+    cowList.appendChild(cowIcons);
+    return {
+      bulls: bullList,
+      cows: cowList
+     }
+  }
+
+  finishGame(form, element, message, playerCode, compCode) {
+    form.classList.add('hidden');
+    element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;
+    const playAgain = document.querySelector('.play-again');
+    playAgain.classList.remove('hidden');
+    playAgain.removeAttribute('disabled');
   }
 
 }

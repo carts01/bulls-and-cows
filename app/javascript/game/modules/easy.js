@@ -10,7 +10,7 @@
 
 import Setup from './setup_class';
 import Play from './play';
-import { formatCode, resetTurn, finishGame, validateCode, formatGuess, displayIcons } from '../../helpers';
+import { formatCode, resetTurn, validateCode, formatGuess } from '../../helpers';
 
 export default class Easy extends Play {
   
@@ -45,25 +45,25 @@ export default class Easy extends Play {
       }
       let userGuess = formatCode(guess.value);
       let userCount = this.checkCode(userGuess, computerCode, "user");
-      let userIcons = displayIcons(userCount.bullCount, userCount.cowCount);
+      let userIcons = this.displayIcons(userCount.bullCount, userCount.cowCount);
       this.displayTableRow(turns, userGuess, userIcons, userTable);
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        finishGame(form, resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(form, resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       let compGuess = this.setup.getComputerCode();
       let compCount = this.checkCode(compGuess, playerCode, "comp");
-      let compIcons = displayIcons(compCount.bullCount, compCount.cowCount);
+      let compIcons = this.displayIcons(compCount.bullCount, compCount.cowCount);
       this.displayTableRow(turns, compGuess, compIcons, compTable);
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        finishGame(form, resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(form, resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       turns++;
       if (turns > 7) {
-        finishGame(form, resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(form, resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       // Function to wait a second or so

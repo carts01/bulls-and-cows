@@ -7,6 +7,24 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+.header {
+  padding: 0 30px;
+  // background-color: green;
+  border-bottom: solid 2px green;
+
+  .svg-icon {
+    height: 36px;
+    width: 36px;
+  }
+
+  .logo-item {
+    color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
     
 .hidden {
   display: none !important;
@@ -17,18 +35,36 @@ main {
   font-weight: bold;
 }
 
-.invalid {
+input[type="text"].invalid {
   border-color: #F44336;
 }
 
 .svg-icon {
-  height: 28px;
-  width: 28px;
+  height: 24px;
+  width: 24px;
 }
 
 .players__table--body, .comp__table--body {
   td {
     vertical-align: middle;
     width: 25%;
+    text-align: center;
   }
+}
+
+.results {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.results--players, .results--comp {
+  flex: 0 0 50%;
+}
+
+.show-user-code {
+  font-style: italic;
+}
+
+.form-container {
+  margin-bottom: 25px;
 }

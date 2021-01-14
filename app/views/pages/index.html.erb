@@ -1,63 +1,70 @@
 <div class="container">
     <h1>This is the home page</h1>
 
-    <div class="row">
+    <div class="form-container">
         <form action="" method="get" id="codeForm" class="col s12">
-            <div class="row">
-            <p>Choose a unique four digit code:</p>
-                <div class="input-field col s6" style="margin-bottom: 30px;">
-                    <input type="text" id="userCode" class="validate" required>
-                    <label for="userCode">Enter code</label>
-                    <span class="error code-error hidden"></span>
-                </div>
-            </div>
-            <div class="row">
-            <p>Choose a level:</p>
-                <div class="col s12">
-                    <label>
-                    <input name="level-group" type="radio" value="easy" checked />
-                    <span>Easy</span>
-                    </label>
-                    <label>
-                    <input name="level-group" type="radio" value="medium" />
-                    <span>Medium</span>
-                    </label>
-                    <label>
-                    <input name="level-group" type="radio" value="hard" />
-                    <span>Hard</span>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                <input type="submit" value="Guess!">
-                </div>
-            </div>
+            <fieldset>
+                <h4>Choose a unique four digit code:</h4>
+                    <div class="form-group">
+                        <label for="userCode">Enter code</label>
+                        <input type="text" id="userCode" class="validate">
+                        <span class="error code-error hidden"></span>
+                    </div>
+                <h4>Select an opponent:</h4>
+                    <div class="form-group">
+                        <label>
+                        <input name="level-group" type="radio" value="bruce" checked />
+                        <span>Bruce (easy)</span>
+                        </label>
+                        <label>
+                        <input name="level-group" type="radio" value="judy" />
+                        <span>Judy (medium)</span>
+                        </label>
+                        <label>
+                        <input name="level-group" type="radio" value="lionel" />
+                        <span>Lionel (hard)</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                    <input class="btn btn-default" type="submit" value="Submit your secret code!">
+                    </div>
+            </fieldset>
         </form>
     </div>
-
-    <form action="" method="get" id="guessForm" class="form-guess hidden">
-
-        <div class="input-field col s12 m6" style="margin-bottom: 30px;">
-            <input type="text" id="userGuess" class="validate" required>
-            <label for="userGuess">Guess the code:</label>
-            <span class="error guess-error hidden"></span>
-        </div>
-
-        <input type="submit" value="Guess!">
-    </form>
 
     <div class="row">
         <div class="col s12 m6">
             <span class="show-user-code"></span>
         </div>
+        <div class="col s12 m6">
+            <span class="show-comp-name"></span>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form action="" method="get" id="guessForm" class="form-guess hidden">
+            <fieldset>
+                <div class="form-group">
+                    <label for="userGuess">Guess the code:</label>
+                    <input type="text" id="userGuess" class="validate">
+                    <span class="error guess-error hidden"></span>
+                </div>
+                <input class="btn btn-default"  type="submit" value="Guess!">
+            </fieldset>
+        </form> 
+    </div>
+
+    <div class="row">
+        <div class="col s12 m6">
+           <span class="show-user-code"></span>
+        </div>
     </div>
 
     <div class="row">
     <div class="results">
-        <div class="col s12 m6">
+        <div class="results--players">
             <h4 class="players__table--name"></h4>
-            <table class="players__table striped centered hidden">
+            <table class="players__table hidden">
                 <thead class="players__table--head">
                     <tr class="table-row">
                         <th>Round</th>
@@ -71,7 +78,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col s12 m6">
+        <div class="results--comp">
             <h4 class="comp__table--name"></h4>
             <table class="comp__table striped centered hidden">
                 <thead class="comp__table--head">

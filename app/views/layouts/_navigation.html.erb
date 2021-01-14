@@ -1,32 +1,34 @@
-<header class="header green darken-2">
-<nav class="green darken-2">
-    <div class="nav-wrapper">
-     <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li>
-          <%= link_to 'Home', root_path, class: 'nav_link grey-text text-lighten-5' %>
-        </li>
-        <li>
-          <%= link_to 'How to play', instructions_path, class: 'nav_link grey-text text-lighten-5' %>
-        </li>
-        <li>
-          <%= link_to 'Play', play_path, class: 'nav_link grey-text text-lighten-5' %>
-        </li>
-        <li>
-          <%= link_to 'Leaderboard', users_path, class: 'nav_link grey-text text-lighten-5' %>
-        </li>
-        <% if logged_in? %>
-          <li>
-            <%= link_to 'Log out', logout_path, class: 'nav_link grey-text text-lighten-5' %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to 'Log in', login_path, class: 'nav_link grey-text text-lighten-5' %>
-          </li>
-          <li>  
-            <%= link_to 'Sign up', register_path, class: 'nav_link grey-text text-lighten-5' %>  
-          </li>
-        <% end %>
-      </ul>
+<header class="header">
+<div class="terminal-nav">
+  <div class="terminal-logo">
+    <div class="logo">
+      <%= link_to svg('bull'), root_path, class: 'no-style logo-item' %>
     </div>
-  </nav>
+  </div>
+  <nav class="terminal-menu">
+      <ul class="menu-list">
+          <li>
+            <%= link_to 'How to play', instructions_path, class: 'menu-item' %>
+          </li>
+          <li>
+            <%= link_to 'Play', play_path, class: 'menu-item' %>
+          </li>
+          <li>
+            <%= link_to 'Leaderboard', users_path, class: 'menu-item' %>
+          </li>
+          <% if logged_in? %>
+            <li>
+              <%= link_to 'Log out', logout_path, class: 'menu-item' %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Log in', login_path, class: 'menu-item' %>
+            </li>
+            <li>  
+              <%= link_to 'Sign up', register_path, class: 'menu-item' %>  
+            </li>
+          <% end %>
+        </ul>
+    </nav>
+  </div>
 </header>

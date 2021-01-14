@@ -1,6 +1,3 @@
-import bullSVG from '../images/bull.svg';
-import cowSVG from '../images/sacred-cow.svg';
-
 export function formatCode(code) {
   const digits = code.split('');
   const codeArray = [];
@@ -17,12 +14,17 @@ export function formatGuess(guess) {
   return number;
 }
 
+export function capitalize(str) {
+  if (typeof str !== 'string') return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 export function levelSelection(choice) {
-  if (choice == "easy") {
+  if (choice == "bruce") {
     return 1;
-  } else if (choice == "medium") {
+  } else if (choice == "judy") {
     return 2;
-  } else if (choice == "hard") {
+  } else if (choice == "lionel") {
     return 3;
   }
 }
@@ -30,14 +32,6 @@ export function levelSelection(choice) {
 export function resetTurn(input) {
   input.removeAttribute('disabled');
   input.value = '';
-}
-
-export function finishGame(form, element, message, playerCode, compCode) {
-  form.classList.add('hidden');
-  element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;
-  const playAgain = document.querySelector('.play-again');
-  playAgain.classList.remove('hidden');
-  playAgain.removeAttribute('disabled');
 }
 
 export function getRadioValue(element) {
@@ -78,51 +72,15 @@ export function displayErrorMessage(element, message, input) {
   element.textContent = message;
   element.classList.remove('hidden');
   input.classList.add('invalid');
+  input.setAttribute('disabled', true);
 
-  setTimeout(clearError, 3000);
+  setTimeout(clearError, 1200);
 
   function clearError() {
     element.textContent = '';
     element.classList.add('hidden');
     input.classList.remove('invalid');
+    input.removeAttribute('disabled');
     input.value = '';
   }
-}
-
-export function displayIcons(bullCount, cowCount) {
-  // Create images and then output them in results table
-  // Use a loop to determine how many to show
-  const bullList = document.createElement('div');
-  const bullIcons = document.createElement('div');
-  for (let i = 0; i < bullCount; i++) {
-    var bullImage = document.createElement("img"); 
-    bullImage.src = bullSVG; 
-    bullImage.classList.add('svg-icon');
-    bullIcons.appendChild(bullImage);
-  }
-
-  const cowList = document.createElement('div');
-  const cowIcons = document.createElement('div');
-  for (let i = 0; i < cowCount; i++) {
-    var cowImage = document.createElement("img"); 
-    cowImage.src = cowSVG; 
-    cowImage.classList.add('svg-icon');
-    cowIcons.appendChild(cowImage);
-  }
-
-  bullList.appendChild(bullIcons);
-  cowList.appendChild(cowIcons);
-  return {
-    bulls: bullList,
-    cows: cowList
-   }
-
-  //var cowImage = document.createElement("img"); 
-  //cowImage.src = cowSVG; 
-  //cowImage.classList.add('svg-icon');
-
-  //var src = document.querySelector(".page-footer"); 
-
-  //src.appendChild(bullImage);
-  //src.appendChild(cowImage);
 }
