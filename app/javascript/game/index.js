@@ -7,6 +7,21 @@ import bullSVG from '../images/bull.svg';
 import cowSVG from '../images/sacred-cow.svg';
 
 class Play {
+
+  selectors = {
+    codeForm: '#codeForm',
+    guessForm: '#guessForm',
+    userCodeContainer: '.show-user-code',
+    userGuessLabel: 'label[for=userGuess]',
+    compTableName: '.comp-table--name',
+    playerTableName: '.players-table--name'
+  }
+
+  classes = {
+    hidden: 'hidden',
+    disabled: 'disabled',
+    invalid: 'invalid'
+  }
   
   start(userCode, levelCode) {
 
@@ -29,15 +44,21 @@ class Play {
     //const medium = new Medium(numberSet, comp, player);
     //const hard = new Hard(numberSet, comp, player);
 
+    const codeForm = document.querySelector(this.selectors.codeForm);
+    const guessForm = document.querySelector(this.selectors.guessForm);
+    const userCodeContainer = document.querySelector(this.selectors.userCodeContainer);
+    const userGuessLabel = document.querySelector(this.selectors.userGuessLabel);
+    const compTableName = document.querySelector(this.selectors.compTableName);
+    const playerTableName = document.querySelector(this.selectors.playerTableName);
+    codeForm.classList.add(this.classes.hidden);
+    guessForm.classList.remove(this.classes.hidden);
+    userCodeContainer.textContent = `Your secret code is ${userCode}`;
+    userGuessLabel.textContent = `Guess ${computerName}'s secret code`;
+    compTableName.textContent = computerName;
+    playerTableName.textContent = 'Player X';
+
     if (level == 1) {
       console.log("easy level selected");
-      document.querySelector('#codeForm').classList.add('hidden');
-      document.querySelector('#guessForm').classList.remove('hidden');
-      document.querySelector('.show-user-code').textContent = `Your secret code is ${userCode}`;
-      // document.querySelector('.show-comp-name').textContent = `You are playing against ${computerName}`;
-      document.querySelector("label[for=userGuess]").textContent = `Guess ${computerName}'s secret code`;
-      document.querySelector('.comp-table--name').textContent = computerName;
-      document.querySelector('.players-table--name').textContent = 'Player X';
       easy.playGame(numberSet, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");

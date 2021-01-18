@@ -28,12 +28,14 @@ export default class Easy extends Play {
 
     let turns = 1;
 
-    const form = document.querySelector('#guessForm');
-    const guess = document.querySelector('#userGuess');
-    const resultContainer = document.querySelector('.result-container');
-    const errorContainer = document.querySelector('.guess-error');
-    const userTable = document.querySelector('.players-table');
-    const compTable = document.querySelector('.comp-table');
+    const form = document.querySelector(this.selectors.form);
+    const guess = document.querySelector(this.selectors.guess);
+    const resultContainer = document.querySelector(this.selectors.resultContainer);
+    const errorContainer = document.querySelector(this.selectors.errorContainer);
+    const playerTable = document.querySelector(this.selectors.playerTable);
+    const compTable = document.querySelector(this.selectors.compTable);
+
+    console.log(this.selectors.form);
     
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -46,7 +48,7 @@ export default class Easy extends Play {
       let userGuess = formatCode(guess.value);
       let userCount = this.checkCode(userGuess, computerCode, "user");
       let userIcons = this.displayIcons(userCount.bullCount, userCount.cowCount);
-      this.displayTableRow(turns, userGuess, userIcons, userTable);
+      this.displayTableRow(turns, userGuess, userIcons, playerTable);
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(form, resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));

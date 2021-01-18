@@ -85,3 +85,10 @@ export function displayErrorMessage(element, message, input) {
     input.value = '';
   }
 }
+
+export function createImageElement(container, source, className) {
+  var image = document.createElement("img"); 
+  image.src = source; 
+  image.classList.add(className);
+  container.appendChild(image);
+}

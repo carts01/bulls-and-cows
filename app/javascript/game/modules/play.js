@@ -1,13 +1,33 @@
 import Setup from './setup_class';
-import { formatGuess, finishGame } from '../../helpers'
+import { formatGuess, createImageElement, finishGame } from '../../helpers'
 
 import bullSVG from '../../images/bull.svg';
 import cowSVG from '../../images/sacred-cow.svg';
+
+/*const selectors = {
+  form: '#guessForm',
+  messageContainer: '.message-container'
+}*/
 
 export default class Play {
 
   constructor () {
 
+  }
+
+  selectors = {
+    form: '#guessForm',
+    guess: '#userGuess',
+    messageContainer: '.message-container',
+    resultContainer: '.result-container',
+    errorContainer: '.guess-error',
+    playerTable: '.players-table',
+    compTable: '.comp-table'
+  }
+
+  classes = {
+    hidden: 'hidden',
+    disabled: 'disabled'
   }
 
   playGame(compCode, playerCode) {
@@ -50,8 +70,10 @@ export default class Play {
 
   checkCode(guess, code, player) {
 
-    const form = document.querySelector('#guessForm');
-    const messageContainer = document.querySelector('.message-container');
+    //const form = document.querySelector('#guessForm');
+    //const messageContainer = document.querySelector('.message-container');
+    //const form = document.querySelector(this.selectors.form);
+    //const messageContiner = document.querySelector(this.selectors.messageContainer);
 
     if (player == "user") {
       let bullCount = this.getBulls(code, guess);
@@ -79,8 +101,8 @@ export default class Play {
   }
 
   displayTableRow(turn, guess, icons, table) {
-    if (table.classList.contains('hidden')) {
-      table.classList.remove('hidden');
+    if (table.classList.contains(this.classes.hidden)) {
+      table.classList.remove(this.classes.hidden);
     }
     const tableBody = table.querySelector('tbody');
     const data = [turn, formatGuess(guess), icons.bulls.innerHTML, icons.cows.innerHTML];
@@ -98,24 +120,21 @@ export default class Play {
     // Use a loop to determine how many to show
     const bullList = document.createElement('div');
     const bullIcons = document.createElement('div');
+
     for (let i = 0; i < bullCount; i++) {
-      var bullImage = document.createElement("img"); 
-      bullImage.src = bullSVG; 
-      bullImage.classList.add('svg-icon');
-      bullIcons.appendChild(bullImage);
+      createImageElement(bullIcons, bullSVG, 'svg-icon');
     }
   
     const cowList = document.createElement('div');
     const cowIcons = document.createElement('div');
+
     for (let i = 0; i < cowCount; i++) {
-      var cowImage = document.createElement("img"); 
-      cowImage.src = cowSVG; 
-      cowImage.classList.add('svg-icon');
-      cowIcons.appendChild(cowImage);
+      createImageElement(cowIcons, cowSVG, 'svg-icon');
     }
   
     bullList.appendChild(bullIcons);
     cowList.appendChild(cowIcons);
+
     return {
       bulls: bullList,
       cows: cowList
@@ -123,10 +142,10 @@ export default class Play {
   }
 
   finishGame(form, element, message, playerCode, compCode) {
-    form.classList.add('hidden');
+    form.classList.add(this.classes.hidden);
     element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;
     const playAgain = document.querySelector('.play-again');
-    playAgain.classList.remove('hidden');
+    playAgain.classList.remove(this.classes.hidden);
     playAgain.removeAttribute('disabled');
   }
 
