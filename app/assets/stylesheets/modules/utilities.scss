@@ -1,0 +1,25 @@
+.hidden {
+  display: none !important;
+}
+
+.error {
+  color: #F44336;
+  font-weight: bold;
+}
+
+input[type="text"].invalid {
+  border-color: #F44336;
+}
+
+.svg-icon {
+  height: 22px;
+  width: 22px;
+}
+
+.page-width {
+  max-width: 1200px;
+}
+
+.text-center {
+  text-align: center;
+}

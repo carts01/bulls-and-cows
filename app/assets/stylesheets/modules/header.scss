@@ -1,0 +1,57 @@
+.header {
+  padding: 0 30px;
+  // background-color: green;
+  border-bottom: solid 2px green;
+
+  .logo {
+    display: flex;
+
+    .logo-image {
+      display: flex;
+    }
+
+    .logo-item--line {
+      background-color: black;
+      width: 4px;
+      height: 48px;
+      margin: 0 8px;
+    }
+  
+    .svg-icon {
+      height: 48px;
+      width: 48px;
+    }
+  
+    .logo-item {
+      color: transparent;
+      margin: 0 8px;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .logo-link {
+      display: flex;
+      flex-direction: column;
+      color: black;
+    
+      &:hover {
+        color: black;
+        background: none;
+      }
+    
+      .logo__inner {
+        display: flex;
+        align-items: center;
+        font-size: 2em;
+        padding: 8px;
+      }
+    
+      .logo-item--name {
+        font-size: 1.2em;
+        text-align: center;
+      }
+    }
+  }
+}
+

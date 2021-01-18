@@ -6,8 +6,8 @@
             <fieldset>
                 <h4>Choose a unique four digit code:</h4>
                     <div class="form-group">
-                        <label for="userCode">Enter code</label>
-                        <input type="text" id="userCode" class="validate">
+                        <label for="userCode" class="hidden">Enter code</label>
+                        <input type="text" id="userCode" class="validate" placeholder="Enter code">
                         <span class="error code-error hidden"></span>
                     </div>
                 <h4>Select an opponent:</h4>
@@ -32,13 +32,8 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="col s12 m6">
-            <span class="show-user-code"></span>
-        </div>
-        <div class="col s12 m6">
-            <span class="show-comp-name"></span>
-        </div>
+    <div class="user-code--container">
+        <span class="show-user-code"></span>
     </div>
 
     <div class="form-container">
@@ -54,18 +49,11 @@
         </form> 
     </div>
 
-    <div class="row">
-        <div class="col s12 m6">
-           <span class="show-user-code"></span>
-        </div>
-    </div>
-
-    <div class="row">
     <div class="results">
         <div class="results--players">
-            <h4 class="players__table--name"></h4>
-            <table class="players__table hidden">
-                <thead class="players__table--head">
+            <h4 class="players-table--name"></h4>
+            <table class="players-table hidden">
+                <thead class="players-table--head">
                     <tr class="table-row">
                         <th>Round</th>
                         <th>Guess</th>
@@ -73,15 +61,15 @@
                         <th>Cows</th>
                     </tr>
                 </thead>
-                <tbody class="players__table--body">
+                <tbody class="players-table--body">
 
                 </tbody>
             </table>
         </div>
         <div class="results--comp">
-            <h4 class="comp__table--name"></h4>
-            <table class="comp__table striped centered hidden">
-                <thead class="comp__table--head">
+            <h4 class="comp-table--name"></h4>
+            <table class="comp-table hidden">
+                <thead class="comp-table--head">
                     <tr class="table-row">
                         <th>Round</th>
                         <th>Guess</th>
@@ -89,11 +77,10 @@
                         <th>Cows</th>
                     </tr>
                 </thead>
-                <tbody class="comp__table--body">
+                <tbody class="comp-table--body">
 
                 </tbody>
             </table>
-        </div>
         </div>
     </div>
 
@@ -102,7 +89,7 @@
     </div>
 
     <div class="reset-container">
-    <button class="play-again hidden" disabled>Play Again</button>
+      <button class="play-again btn btn-default hidden" disabled>Play Again</button>
     </div>
 
 </div>

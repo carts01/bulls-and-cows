@@ -32,6 +32,7 @@ export function levelSelection(choice) {
 export function resetTurn(input) {
   input.removeAttribute('disabled');
   input.value = '';
+  input.focus();
 }
 
 export function getRadioValue(element) {

@@ -1,3 +1,7 @@
+@import 'modules/utilities';
+@import 'modules/header';
+@import 'modules/game';
+
 body {
   display: flex;
   min-height: 100vh;
@@ -8,104 +12,19 @@ main {
   flex: 1 0 auto;
 }
 
-.header {
-  padding: 0 30px;
-  // background-color: green;
-  border-bottom: solid 2px green;
+.page-footer {
+  padding: 30px;
+  border-top: solid 2px green;
 
-  .logo {
-
-    display: flex;
-
-    .logo__image {
-      display: flex;
-    }
-
-    .logo-item--line {
-      background-color: black;
-      width: 4px;
-      height: 48px;
-      margin: 0 8px;
-    }
-  
-    .svg-icon {
-      height: 48px;
-      width: 48px;
-    }
-  
-    .logo-item {
-      color: transparent;
-      margin: 0 8px;
-      &:hover {
-        background-color: transparent;
-      }
-    }
-  }
-
-}
-    
-.hidden {
-  display: none !important;
-}
-
-.error {
-  color: #F44336;
-  font-weight: bold;
-}
-
-input[type="text"].invalid {
-  border-color: #F44336;
-}
-
-.svg-icon {
-  height: 22px;
-  width: 22px;
-}
-
-.players__table--body, .comp__table--body {
-  td {
-    vertical-align: middle;
-    width: 25%;
-    text-align: center;
-  }
-}
-
-.results {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.results--players, .results--comp {
-  flex: 0 0 50%;
-}
-
-.show-user-code {
-  font-style: italic;
-}
-
-.form-container {
-  margin-bottom: 25px;
-}
-
-.logo__link {
-  display: flex;
-  flex-direction: column;
-  color: black;
-
-  &:hover {
-    color: black;
-    background: none;
-  }
-
-  .logo__inner {
+  .footer-icons {
     display: flex;
     align-items: center;
-    font-size: 2em;
-    padding: 8px;
+    justify-content: center;
+    margin-bottom: 15px;
   }
 
-  .logo-item--name {
-    font-size: 1.2em;
-    text-align: center;
+  .footer-icons--message {
+    margin: 0 15px;
   }
 }
+

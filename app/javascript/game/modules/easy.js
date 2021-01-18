@@ -32,8 +32,8 @@ export default class Easy extends Play {
     const guess = document.querySelector('#userGuess');
     const resultContainer = document.querySelector('.result-container');
     const errorContainer = document.querySelector('.guess-error');
-    const userTable = document.querySelector('.players__table');
-    const compTable = document.querySelector('.comp__table');
+    const userTable = document.querySelector('.players-table');
+    const compTable = document.querySelector('.comp-table');
     
     form.addEventListener('submit', (event) => {
       event.preventDefault();

@@ -6,13 +6,6 @@ import { formatCode, levelSelection, getRadioValue, validateCode, capitalize } f
 import bullSVG from '../images/bull.svg';
 import cowSVG from '../images/sacred-cow.svg';
 
-const EASY = 1;
-const MEDIUM = 2;
-const HARD = 3;
-
-const YES = 1;
-const NO = 2;
-
 class Play {
   
   start(userCode, levelCode) {
@@ -43,8 +36,8 @@ class Play {
       document.querySelector('.show-user-code').textContent = `Your secret code is ${userCode}`;
       // document.querySelector('.show-comp-name').textContent = `You are playing against ${computerName}`;
       document.querySelector("label[for=userGuess]").textContent = `Guess ${computerName}'s secret code`;
-      document.querySelector('.comp__table--name').textContent = computerName;
-      document.querySelector('.players__table--name').textContent = 'Player X';
+      document.querySelector('.comp-table--name').textContent = computerName;
+      document.querySelector('.players-table--name').textContent = 'Player X';
       easy.playGame(numberSet, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");
@@ -64,6 +57,7 @@ document.addEventListener('turbolinks:load', function() {
   const errorContainer = document.querySelector('.code-error');
   const playAgain = document.querySelector('.play-again');
   const radioLevel = document.querySelectorAll('[name="level-group"]');
+  codeInput.focus();
 
   /*
   codeInput.addEventListener('keyup', (event) => {
