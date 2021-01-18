@@ -2,8 +2,20 @@
 <div class="terminal-nav">
   <div class="terminal-logo">
     <div class="logo">
-      <%= link_to svg('bull'), root_path, class: 'no-style logo-item' %>
+      <a href="/" class="logo__link">
+      <div class="logo__image">
+        <div class="logo-item">
+          <%= svg 'bull' %>
+        </div>
+        <div class="logo-item--line"></div>
+        <div class="logo-item">
+          <%= svg 'sacred-cow' %>
+        </div>
+      </div>
+      <div class="logo-item--name">Bulls &amp; Cows</div>
+      </a>
     </div>
+
   </div>
   <nav class="terminal-menu">
       <ul class="menu-list">

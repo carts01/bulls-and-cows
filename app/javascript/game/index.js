@@ -42,6 +42,7 @@ class Play {
       document.querySelector('#guessForm').classList.remove('hidden');
       document.querySelector('.show-user-code').textContent = `Your secret code is ${userCode}`;
       // document.querySelector('.show-comp-name').textContent = `You are playing against ${computerName}`;
+      document.querySelector("label[for=userGuess]").textContent = `Guess ${computerName}'s secret code`;
       document.querySelector('.comp__table--name').textContent = computerName;
       document.querySelector('.players__table--name').textContent = 'Player X';
       easy.playGame(numberSet, comp, player);

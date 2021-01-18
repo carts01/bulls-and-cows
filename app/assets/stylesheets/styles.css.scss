@@ -13,17 +13,35 @@ main {
   // background-color: green;
   border-bottom: solid 2px green;
 
-  .svg-icon {
-    height: 36px;
-    width: 36px;
-  }
+  .logo {
 
-  .logo-item {
-    color: transparent;
-    &:hover {
-      background-color: transparent;
+    display: flex;
+
+    .logo__image {
+      display: flex;
+    }
+
+    .logo-item--line {
+      background-color: black;
+      width: 4px;
+      height: 48px;
+      margin: 0 8px;
+    }
+  
+    .svg-icon {
+      height: 48px;
+      width: 48px;
+    }
+  
+    .logo-item {
+      color: transparent;
+      margin: 0 8px;
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
+
 }
     
 .hidden {
@@ -40,8 +58,8 @@ input[type="text"].invalid {
 }
 
 .svg-icon {
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
 }
 
 .players__table--body, .comp__table--body {
@@ -67,4 +85,27 @@ input[type="text"].invalid {
 
 .form-container {
   margin-bottom: 25px;
+}
+
+.logo__link {
+  display: flex;
+  flex-direction: column;
+  color: black;
+
+  &:hover {
+    color: black;
+    background: none;
+  }
+
+  .logo__inner {
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    padding: 8px;
+  }
+
+  .logo-item--name {
+    font-size: 1.2em;
+    text-align: center;
+  }
 }
