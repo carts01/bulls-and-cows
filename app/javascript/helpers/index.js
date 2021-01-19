@@ -83,6 +83,7 @@ export function displayErrorMessage(element, message, input) {
     input.classList.remove('invalid');
     input.removeAttribute('disabled');
     input.value = '';
+    input.focus();
   }
 }
 

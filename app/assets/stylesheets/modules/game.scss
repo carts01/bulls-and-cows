@@ -1,4 +1,9 @@
 .players-table--body, .comp-table--body {
+
+  tr {
+    height: 40px;
+  }
+
   td {
     vertical-align: middle;
     width: 25%;

@@ -6,13 +6,13 @@
 //let code = newGame._getComputerCode();
 //console.log(code);
 
-// Easy game play
+// Medium game play
 
 import Setup from './setup';
 import Play from './play';
 import { formatCode, resetTurn, validateCode, formatGuess } from '../../helpers';
 
-export default class Easy extends Play {
+export default class Medium extends Play {
   
   constructor() {
     super();
@@ -22,7 +22,10 @@ export default class Easy extends Play {
 
     this.compCode = computerCode;
     this.playerCode = playerCode;
-    console.log(this.compCode);
+    this.numberSet = numberSet;
+
+    console.log("Number Set:" + this.numberSet.size);
+    console.log("Comp code: " + this.compCode);
 
     this.setup = new Setup();
 
@@ -46,6 +49,7 @@ export default class Easy extends Play {
         return;
       }
       let compGuess = this.setup.getComputerCode();
+
       let compCount = this.checkCode(compGuess, this.playerCode, "comp");
       let compIcons = this.displayIcons(compCount.bullCount, compCount.cowCount);
       this.displayTableRow(turns, compGuess, compIcons, this.compTable);

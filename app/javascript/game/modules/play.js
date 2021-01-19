@@ -1,18 +1,18 @@
-import Setup from './setup_class';
+import Setup from './setup';
 import { formatGuess, createImageElement, finishGame } from '../../helpers'
 
 import bullSVG from '../../images/bull.svg';
 import cowSVG from '../../images/sacred-cow.svg';
 
-/*const selectors = {
-  form: '#guessForm',
-  messageContainer: '.message-container'
-}*/
-
 export default class Play {
 
   constructor () {
-
+    this.form = document.querySelector(this.selectors.form);
+    this.guess = document.querySelector(this.selectors.guess);
+    this.resultContainer = document.querySelector(this.selectors.resultContainer);
+    this.errorContainer = document.querySelector(this.selectors.errorContainer);
+    this.playerTable = document.querySelector(this.selectors.playerTable);
+    this.compTable = document.querySelector(this.selectors.compTable);
   }
 
   selectors = {
@@ -22,7 +22,8 @@ export default class Play {
     resultContainer: '.result-container',
     errorContainer: '.guess-error',
     playerTable: '.players-table',
-    compTable: '.comp-table'
+    compTable: '.comp-table',
+    replay: '.play-again'
   }
 
   classes = {
@@ -70,11 +71,6 @@ export default class Play {
 
   checkCode(guess, code, player) {
 
-    //const form = document.querySelector('#guessForm');
-    //const messageContainer = document.querySelector('.message-container');
-    //const form = document.querySelector(this.selectors.form);
-    //const messageContiner = document.querySelector(this.selectors.messageContainer);
-
     if (player == "user") {
       let bullCount = this.getBulls(code, guess);
       let cowCount = this.getCows(code, guess);
@@ -98,6 +94,7 @@ export default class Play {
         cowCount
       }
     }
+
   }
 
   displayTableRow(turn, guess, icons, table) {
@@ -116,18 +113,14 @@ export default class Play {
   }
 
   displayIcons(bullCount, cowCount) {
-    // Create images and then output them in results table
-    // Use a loop to determine how many to show
     const bullList = document.createElement('div');
     const bullIcons = document.createElement('div');
-
     for (let i = 0; i < bullCount; i++) {
       createImageElement(bullIcons, bullSVG, 'svg-icon');
     }
   
     const cowList = document.createElement('div');
     const cowIcons = document.createElement('div');
-
     for (let i = 0; i < cowCount; i++) {
       createImageElement(cowIcons, cowSVG, 'svg-icon');
     }
@@ -144,7 +137,7 @@ export default class Play {
   finishGame(form, element, message, playerCode, compCode) {
     form.classList.add(this.classes.hidden);
     element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;
-    const playAgain = document.querySelector('.play-again');
+    const playAgain = document.querySelector(this.selectors.replay);
     playAgain.classList.remove(this.classes.hidden);
     playAgain.removeAttribute('disabled');
   }

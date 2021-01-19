@@ -1,48 +1,38 @@
-window.game = window.game || {};
+export default class Setup {
 
-game.Setup = (function() {
-
-  let numberSet;
-  let computerCode = [];
-  let playerCode = [];
-
-  function createNewGame() {
-    // createNumberSet(numberSet);
-    getComputerCode(computerCode);
-    getPlayerCode(playerCode);
+  constructor() {
+    console.log('Setup game');
+    // Get user code and pass it in constructor
   }
 
-  function createNumberSet(numberSet) {
-    numberSet = new Set();
-
-    while (numberSet.size < 5040) {
-      numberSet.add(getComputerCode());
+  init() {
+    return {
+      computerCode: this.getComputerCode(),
+      playerCode: this.getPlayerCode(),
+      numberSet: this.createNumberSet(),
+      computerPlayer: this.generateComputerPlayer()
     }
+  }
 
+  generateComputerPlayer() {
+    const players = ["Lionel", "Alice", "Bruce", "Jacob", "Judy", "Eric", "Leroy", "Sandra", "Mary"];
+    const random = Math.floor(Math.random() * Math.floor(players.length));
+    console.log(random);
+    return players[random];
+  }
+
+  createNumberSet() {
+    const numberSet = new Set();
+    
+    while (numberSet.size < 5040) {
+      numberSet.add(this.getComputerCode());
+    }
+  
     console.log('Number Set');
     return numberSet;
   }
 
-  function getComputerCode(code) {
-
-      // Initialize digits array to hold 10 digits from 0-9
-      const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  
-      // Iterate four times and add one random digit from the digits array to the code each time
-      for (let i = 0; i < 4; i++) {
-        let randomIndex = Math.floor(Math.random() * digits.length);
-        code[i] = digits[randomIndex];
-        digits.splice(randomIndex, 1);
-      }
-  
-      console.log(code);
-      // Return the final code
-      return code;
-  }
-
-
-  function getPlayerCode (code) {
-
+  getComputerCode(code = []) {
     // Initialize digits array to hold 10 digits from 0-9
     const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -53,13 +43,27 @@ game.Setup = (function() {
       digits.splice(randomIndex, 1);
     }
 
-    console.log(code);
+    // console.log(code);
     // Return the final code
     return code;
+}
+
+
+  getPlayerCode (code = []) {
+
+  // Initialize digits array to hold 10 digits from 0-9
+  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  // Iterate four times and add one random digit from the digits array to the code each time
+  for (let i = 0; i < 4; i++) {
+    let randomIndex = Math.floor(Math.random() * digits.length);
+    code[i] = digits[randomIndex];
+    digits.splice(randomIndex, 1);
   }
 
-  return {
-    createNewGame: createNewGame
-  };
+  // console.log(code);
+  // Return the final code
+  return code;
+}
 
-})();
+}
