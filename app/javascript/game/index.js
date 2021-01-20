@@ -2,6 +2,7 @@ import Easy from './modules/easy';
 import Medium from './modules/medium';
 import Setup from './modules/setup';
 import { formatCode, levelSelection, getRadioValue, validateCode, capitalize } from '../helpers/index';
+import { codes } from '../helpers/codes';
 
 class Play {
 
@@ -23,118 +24,26 @@ class Play {
     disabled: 'disabled',
     invalid: 'invalid'
   }
-
-  testCodes() {
-    const setup = new Setup();
-    let numberSet = setup.createNumberSet();
-    let numberArray = [...numberSet]
-    let random = Math.floor(Math.random() * Math.floor(numberArray.length));
-    // let compGuess = numberArray[random];
-    let compGuess = [1, 4, 7, 9];
-    // let userCode = setup.getComputerCode();
-    let userCode = [1, 5, 3, 2];
-    console.log("Original array length: " + numberArray.length);
-    console.log(userCode);
-    console.log("Original guess: " + compGuess);
-    let newArray = [];
-    let index = 0;
-    for (let i = 0; i < compGuess.length; i++) {
-      // Check if there is a bull
-      if (userCode[i] == compGuess[i]) {
-        let bull = compGuess[i];
-        console.log("Bull: " + compGuess[i]);
-        console.log("Index: " + i);
-        index = i;
-
-        // If there is a bull - create new array containing only codes that contain that bull in the correct position
-        numberArray.forEach(num => {
-          if (num[i] === bull) {
-            newArray.push(num);
-          }
-        });
-
-        break;
-        }
-      }
-
-      console.log(newArray);
-
-      let indexTwo = 0;
-      let thirdArray = [];
-      if (newArray.length > 0) {
-        let newRandom = Math.floor(Math.random() * Math.floor(newArray.length));
-        // let secondGuess = newArray[newRandom];
-        let secondGuess = [1, 6, 4, 2];
-        console.log('Second Guess: ' + secondGuess);
-        for (let i = 0; i < secondGuess.length; i++) {
-          console.log("First bull: " + userCode[index]);
-          // Check if there is a bull
-          
-          if (i !== index) {
-            if (userCode[i] == secondGuess[i]) {
-              let secondBull = secondGuess[i];
-              console.log("Bull (2nd round): " + secondBull);
-              console.log("Index (2nd round): " + i);
-              indexTwo = i;
-      
-              // If there is a bull - create new array containing only codes that contain that bull in the correct position
-              newArray.forEach(num => {
-                if (num[i] === secondBull) {
-                  thirdArray.push(num);
-                }
-              });
-            
-              }
-          } 
-          }
-          console.log(thirdArray);
-      }
-
-      let fourthArray = [];
-      if (thirdArray.length > 0) {
-        let newRandom = Math.floor(Math.random() * Math.floor(newArray.length));
-        // let secondGuess = newArray[newRandom];
-        let thirdGuess = [1, 6, 3, 2];
-        console.log('Third Guess: ' + thirdGuess);
-        for (let i = 0; i < thirdGuess.length; i++) {
-          console.log("First bull: " + userCode[index]);
-          console.log("Second bull: " + userCode[indexTwo]);
-          // Check if there is a bull
-          
-          if (i !== index && i !== indexTwo) {
-            if (userCode[i] == thirdGuess[i]) {
-              let thirdBull = thirdGuess[i];
-              console.log("Bull (3rd round): " + thirdBull);
-              console.log("Index (3rd round): " + i);
-      
-              // If there is a bull - create new array containing only codes that contain that bull in the correct position
-              thirdArray.forEach(num => {
-                if (num[i] === thirdBull) {
-                  fourthArray.push(num);
-                }
-              });
-            
-              }
-          } 
-          }
-          console.log(fourthArray);
-      }
-
-     
-    
-  }
-
-  checkBulls(code, guess, bulls, numbers) {
-    // Loop through numbers (which will be a new array each time - if it has been whittled down accordingly)
-    // Use logic above to check codes against guesses
-    // Bulls are passed in so we can check that we aren't checking them multiple times
-  }
   
   start(userCode, levelCode) {
 
     const setup = new Setup();
     let comp = setup.getComputerCode();
+ 
+    // Create set
     let numberSet = setup.createNumberSet();
+
+    // Convert array of 5040 unique strings into array of arrays
+    let numberArray = [...numberSet]
+    let codesArray = numberArray.map((num) => {
+      return formatCode(num);
+    });
+
+    console.log(numberSet);
+    console.log(numberArray);
+    console.log(codesArray);
+    
+
     let player = formatCode(userCode);
     let level = levelSelection(levelCode);
     const computerName = capitalize(levelCode);
@@ -144,9 +53,8 @@ class Play {
     console.log(player)
     console.log(level);
 
-    console.log(typeof numberSet);
     const easy = new Easy();
-    const medium = new Medium(numberSet, comp, player);
+    const medium = new Medium();
     //const hard = new Hard(numberSet, comp, player);
 
     const codeForm = document.querySelector(this.selectors.codeForm);
@@ -167,7 +75,7 @@ class Play {
       easy.playGame(numberSet, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");
-      medium.playGame(numberSet, comp, player);
+      medium.playGame(codesArray, comp, player);
     } else if (level == 3) {
       console.log("hard level selected");
       //console.log(hard.playGame());

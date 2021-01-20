@@ -23,12 +23,16 @@ export default class Setup {
 
   createNumberSet() {
     const numberSet = new Set();
-    
     while (numberSet.size < 5040) {
-      numberSet.add(this.getComputerCode());
+      // Convert codes into strings to ensure that codes passed in are unique
+      // [1, 2, 3, 4] !== [1, 2, 3, 4] so duplicate arrays could be added
+      let code = this.getComputerCode();
+      let str = '';
+      code.forEach((c) => {
+        str = str + c;
+      });
+      numberSet.add(str);
     }
-  
-    console.log('Number Set');
     return numberSet;
   }
 
