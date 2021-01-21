@@ -72,7 +72,7 @@ class Play {
 
     if (level == 1) {
       console.log("easy level selected");
-      easy.playGame(numberSet, comp, player);
+      easy.playGame(codesArray, comp, player);
     } else if (level == 2) {
       console.log("medium level selected");
       medium.playGame(codesArray, comp, player);
@@ -82,6 +82,182 @@ class Play {
     }
 
   }
+
+  testCodesHard(userCodeTest, bulls) {
+
+    const setup = new Setup();
+ 
+    // Create set
+    let numberSet = setup.createNumberSet();
+
+    // Convert array of 5040 unique strings into array of arrays
+    let numberArray = [...numberSet]
+    let codesArray = numberArray.map((num) => {
+      return formatCode(num);
+    });
+
+    let compGuess = [1, 2, 3, 4];
+
+    console.log("user code: " + userCodeTest);
+    console.log("Before array length: " + codesArray.length);
+    console.log("Original guess: " + compGuess);
+    console.log("Bulls length: " + bulls.length);
+
+    const cacheBulls = bulls.map(bull => bull);
+
+    let afterGuess = this.refineNumberSetHard(userCodeTest, compGuess, bulls, cacheBulls, codesArray);
+    this.numberSet = afterGuess.numbers;
+    bulls = afterGuess.bulls;
+    console.log("Cached bulls: " + cacheBulls.length);
+    console.log("New bulls: " + bulls.length);
+
+    console.log("-----------------------------------------------");
+    console.log("Bulls (index): " + bulls);
+    console.log("After array length: " + codesArray.length);
+    console.log("-----------------------------------------------");
+ }
+
+ refineNumberSetHard(code, guess, bulls, prevBulls, numbers) {
+  let originalArray = numbers;
+  let guessIndex = originalArray.indexOf(guess);
+  if (guessIndex !== -1) {
+    originalArray.splice(guessIndex, 1);
+  }
+  
+  let newArray = [];
+  for (let i = 0; i < guess.length; i++) {
+
+      if (code[i] == guess[i]) {
+        let bull = guess[i];
+        bulls.push(i);
+
+        originalArray.forEach(num => {
+          if (num[i] === bull) {
+            newArray.push(num);
+          }
+        });
+
+        break;
+    } else {
+      for (let j = 0; j < guess.length; j++) {
+        if (code[i] == guess[j]) {
+          let cow = guess[j];
+          console.log(cow);
+          
+          originalArray.forEach(num => {
+            if(num[i] == cow) {
+              originalArray.splice(originalArray.indexOf())
+            }
+          })
+        }
+      }
+    }
+  }
+
+  if (bulls.length > prevBulls.length) {
+    console.log("-----------------------------------------------");
+    console.log("Recursion - call function a second time");
+    console.log("Current Bulls count: " + bulls.length);
+    console.log("Previous Bulls count: " + prevBulls.length);
+    console.log("New array length: " + newArray.length);
+    console.log("-----------------------------------------------");
+    prevBulls.push(1);
+    this.refineNumberSetHard(code, guess, bulls, prevBulls, newArray);
+  }
+    if (newArray.length > 0) {
+      return {
+        numbers: newArray,
+        bulls: bulls
+      }
+    } else {
+      return {
+        numbers: originalArray,
+        bulls: bulls
+      } 
+    }
+  }
+
+  testCodesMedium(userCodeTest, bulls) {
+
+     const setup = new Setup();
+  
+     // Create set
+     let numberSet = setup.createNumberSet();
+ 
+     // Convert array of 5040 unique strings into array of arrays
+     let numberArray = [...numberSet]
+     let codesArray = numberArray.map((num) => {
+       return formatCode(num);
+     });
+
+     let compGuess = [1, 2, 3, 4];
+
+     console.log("user code: " + userCodeTest);
+     console.log("Before array length: " + codesArray.length);
+     console.log("Original guess: " + compGuess);
+     console.log("Bulls length: " + bulls.length);
+
+     const cacheBulls = bulls.map(bull => bull);
+ 
+     let afterGuess = this.refineNumberSetMedium(userCodeTest, compGuess, bulls, cacheBulls, codesArray);
+     this.numberSet = afterGuess.numbers;
+     bulls = afterGuess.bulls;
+     console.log("Cached bulls: " + cacheBulls.length);
+     console.log("New bulls: " + bulls.length);
+
+     console.log("-----------------------------------------------");
+     console.log("Bulls (index): " + bulls);
+     console.log("After array length: " + codesArray.length);
+     console.log("-----------------------------------------------");
+  }
+
+  refineNumberSetMedium(code, guess, bulls, prevBulls, numbers) {
+    let originalArray = numbers;
+    let guessIndex = originalArray.indexOf(guess);
+    if (guessIndex !== -1) {
+      originalArray.splice(guessIndex, 1);
+    }
+    
+    let newArray = [];
+    for (let i = 0; i < guess.length; i++) {
+      if (!bulls.includes(i)) {
+        if (code[i] == guess[i]) {
+          let bull = guess[i];
+          bulls.push(i);
+
+          originalArray.forEach(num => {
+            if (num[i] === bull) {
+              newArray.push(num);
+            }
+          });
+
+          break;
+        }
+      }
+    }
+
+    if (bulls.length > prevBulls.length) {
+      console.log("-----------------------------------------------");
+      console.log("Recursion - call function a second time");
+      console.log("Current Bulls count: " + bulls.length);
+      console.log("Previous Bulls count: " + prevBulls.length);
+      console.log("New array length: " + newArray.length);
+      console.log("-----------------------------------------------");
+      prevBulls.push(1);
+      this.refineNumberSetMedium(code, guess, bulls, prevBulls, newArray);
+    }
+      if (newArray.length > 0) {
+        return {
+          numbers: newArray,
+          bulls: bulls
+        }
+      } else {
+        return {
+          numbers: originalArray,
+          bulls: bulls
+        } 
+      }
+    }
 }
 
 document.addEventListener('turbolinks:load', function() {
@@ -91,12 +267,17 @@ document.addEventListener('turbolinks:load', function() {
   const errorContainer = document.querySelector(game.selectors.error);
   const playAgain = document.querySelector(game.selectors.replay);
   const radioLevel = document.querySelectorAll(game.selectors.radioLevel);
+  // Testing
+  const codeInputTest = document.querySelector('#userCodeTest');
   codeInput.focus();
 
   // Testing random code
   document.querySelector('.testing-code').addEventListener('click', (event) => {
     event.preventDefault();
-    game.testCodes();
+    const userCodeTest = codeInputTest.value;
+    const bulls = [];
+    //game.testCodesMedium(userCodeTest, bulls);
+    game.testCodesHard(userCodeTest, bulls);
   })
 
   form.addEventListener('submit', (event) => {

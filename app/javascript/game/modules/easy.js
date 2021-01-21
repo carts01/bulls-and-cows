@@ -22,6 +22,7 @@ export default class Easy extends Play {
 
     this.compCode = computerCode;
     this.playerCode = playerCode;
+    this.numberSet = numberSet;
     console.log(this.compCode);
 
     this.setup = new Setup();
@@ -54,6 +55,19 @@ export default class Easy extends Play {
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
+
+      console.log("User code: " + this.playerCode);
+      console.log("Before array length: " + this.numberSet.length);
+      console.log("Original guess: " + compGuess);
+  
+      let afterGuess = this.refineNumberSet(compGuess, this.numberSet);
+      this.numberSet = afterGuess;
+
+      console.log("-----------------------------------------------");
+      console.log(`After ${turns} turns`);
+      console.log(afterGuess);
+      console.log("After array length: " + this.numberSet.length);
+
       turns++;
       if (turns > 7) {
         // End game here and declare the result a draw
@@ -66,4 +80,17 @@ export default class Easy extends Play {
     });
 
   }
+
+
+  refineNumberSet(guess, numbers) {
+    // Loop through numbers (which will be a new array each time - if it has been whittled down accordingly)
+    // Use logic above to check codes against guesses
+    // Bulls are passed in so we can check that we aren't checking them multiple time
+    const originalArray = numbers;
+    // Find index of guess and then remove it from the array so it can't be guessed again
+    let guessIndex = originalArray.indexOf(guess);
+    originalArray.splice(guessIndex, 1);
+    
+    return originalArray;
+    }
 }
