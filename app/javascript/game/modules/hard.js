@@ -6,13 +6,13 @@
 //let code = newGame._getComputerCode();
 //console.log(code);
 
-// Easy game play
+// Medium game play
 
 import Setup from './setup';
 import Play from './play';
 import { formatCode, resetTurn, validateCode, formatGuess } from '../../helpers';
 
-export default class Easy extends Play {
+export default class Medium extends Play {
   
   constructor() {
     super();
@@ -23,13 +23,13 @@ export default class Easy extends Play {
     this.compCode = computerCode;
     this.playerCode = playerCode;
     this.numberSet = numberSet;
-    console.log(this.compCode);
 
     this.setup = new Setup();
 
     let turns = 1;
     
     this.form.addEventListener('submit', (event) => {
+
       event.preventDefault();
       this.guess.setAttribute('disabled', true);
       const validCode = validateCode(this.guess.value, this.errorContainer, this.guess);
@@ -37,6 +37,7 @@ export default class Easy extends Play {
         setTimeout(resetTurn, 100, this.guess);
         return;
       }
+      // User guess functionality
       let userGuess = formatCode(this.guess.value);
       let userCount = this.checkCode(userGuess, this.compCode, "user");
       let userIcons = this.displayIcons(userCount.bullCount, userCount.cowCount);
@@ -46,7 +47,12 @@ export default class Easy extends Play {
         this.finishGame(this.form, this.resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
-      let compGuess = this.setup.getComputerCode();
+
+      // Computer guess functionality
+      let random = Math.floor(Math.random() * Math.floor(this.numberSet.length));
+      let compGuess = this.numberSet[random];
+      console.log(compGuess);
+
       let compCount = this.checkCode(compGuess, this.playerCode, "comp");
       let compIcons = this.displayIcons(compCount.bullCount, compCount.cowCount);
       this.displayTableRow(turns, compGuess, compIcons, this.compTable);
@@ -55,19 +61,16 @@ export default class Easy extends Play {
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
-
-      console.log("User code: " + this.playerCode);
-      console.log("Before array length: " + this.numberSet.length);
-      console.log("Original guess: " + compGuess);
   
-      let afterGuess = this.refineNumberSet(compGuess, this.numberSet);
+      // Call refineNumberSet function to check for bulls and cows and refine number set accordingly
+      let afterGuess = this.refineNumberSet(this.playerCode, compGuess, this.numberSet);
       this.numberSet = afterGuess;
 
       console.log("-----------------------------------------------");
       console.log(`After ${turns} turns`);
-      console.log(afterGuess);
       console.log("After array length: " + this.numberSet.length);
-
+      console.log("-----------------------------------------------");
+  
       turns++;
       if (turns > 7) {
         // End game here and declare the result a draw
@@ -81,15 +84,40 @@ export default class Easy extends Play {
 
   }
 
-  refineNumberSet(guess, numbers) {
-    // Loop through numbers (which will be a new array each time - if it has been whittled down accordingly)
-    // Use logic above to check codes against guesses
-    // Bulls are passed in so we can check that we aren't checking them multiple time
-    const originalArray = numbers;
-    // Find index of guess and then remove it from the array so it can't be guessed again
+  refineNumberSet(code, guess, numbers) {
+    let originalArray = numbers;
     let guessIndex = originalArray.indexOf(guess);
-    originalArray.splice(guessIndex, 1);
-    
-    return originalArray;
+    if (guessIndex !== -1) {
+      originalArray.splice(guessIndex, 1);
     }
+ 
+    for (let i = 0; i < guess.length; i++) {
+        if (code[i] == guess[i]) {
+          let bull = guess[i];
+  
+          let filteredArray = originalArray.filter((num) => {
+            return (num[i] == bull);
+          });
+  
+          originalArray = filteredArray;
+
+        } else {
+
+          for (let j = 0; j < guess.length; j++) {
+              if (code[i] == guess[j]) {
+                let cow = parseInt(code[i]);
+  
+                let filteredArray = originalArray.filter((num) => {
+                  return (num.includes(cow));
+                });
+  
+                originalArray = filteredArray;
+              }
+          }
+      }
+    }
+  
+      return originalArray;
+    }
+
 }

@@ -27,9 +27,6 @@ export default class Medium extends Play {
     this.setup = new Setup();
 
     let turns = 1;
-
-    // Initialize array to hold bulls that are found
-    let bulls = [];
     
     this.form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -63,18 +60,13 @@ export default class Medium extends Play {
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
-
-      // Create copy of bulls array to use to check if the length has changed
-      const cacheBulls = bulls.map(bull => bull);
   
       // Call refineNumberSet function to check for bulls and if a match remove from array
-      let afterGuess = this.refineNumberSet(this.playerCode, compGuess, bulls, cacheBulls, this.numberSet);
-      this.numberSet = afterGuess.numbers;
-      bulls = afterGuess.bulls;
+      let afterGuess = this.refineNumberSet(this.playerCode, compGuess, this.numberSet);
+      this.numberSet = afterGuess;
 
       console.log("-----------------------------------------------");
       console.log(`After ${turns} turns`);
-      console.log("Bulls (index): " + bulls);
       console.log("After array length: " + this.numberSet.length);
       console.log("-----------------------------------------------");
   
@@ -91,7 +83,7 @@ export default class Medium extends Play {
 
   }
 
-  refineNumberSet(code, guess, bulls, prevBulls, numbers) {
+  refineNumberSet(code, guess, numbers) {
 
     let originalArray = numbers;
     // Find index of guess and then remove it from the array so it can't be guessed again
@@ -101,29 +93,25 @@ export default class Medium extends Play {
     }
     
     // Initialize empty array to hold refined guesses
-    let newArray = [];
     for (let i = 0; i < guess.length; i++) {
       // Check if the list of bulls contains the index - i.e. if bull has already been found
-      if (!bulls.includes(i)) {
 
       // Check if there is a bull
       if (code[i] == guess[i]) {
         let bull = guess[i];
-        bulls.push(i);
 
         // If there is a bull - create new array containing only codes that contain that bull in the correct position
-        originalArray.forEach(num => {
-          if (num[i] === bull) {
-            newArray.push(num);
-          }
+        let filteredArray = originalArray.filter((num) => {
+          return (num[i] == bull);
         });
 
-        break;
-        }
+        originalArray = filteredArray;
+      
       }
     }
 
     // If a bull has been found, recursively call the function again to check for subsequent bulls
+    /*
     if (bulls.length > prevBulls.length) {
       console.log("-----------------------------------------------");
       console.log("Recursion - call function a second time");
@@ -134,19 +122,10 @@ export default class Medium extends Play {
       prevBulls.push(1);
       this.refineNumberSet(code, guess, bulls, prevBulls, newArray);
     }
+    */
 
     // Return new array if altered, else return the original array (minus the spliced guess)
-      if (newArray.length > 0) {
-        return {
-          numbers: newArray,
-          bulls: bulls
-        }
-      } else {
-        return {
-          numbers: originalArray,
-          bulls: bulls
-        } 
-      }
+      return originalArray;
 
     }
 }
