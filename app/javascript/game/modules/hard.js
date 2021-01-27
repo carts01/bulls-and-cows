@@ -37,6 +37,21 @@ export default class Medium extends Play {
         setTimeout(resetTurn, 100, this.guess);
         return;
       }
+
+      // This can be put into a re-usable function
+
+      // Show progress bar
+      if (this.progressBarContainer.classList.contains(this.classes.hidden)) {
+        this.progressBarContainer.classList.remove(this.classes.hidden);
+      }
+
+      // Update progress bar
+      const percentagePlayed = (turns / 7) * 100;
+      this.progressBar.style.width = `${percentagePlayed}%`;
+      this.progressBar.dataset.filled = turns;
+
+      // This can be put into a re-usable function
+
       // User guess functionality
       let userGuess = formatCode(this.guess.value);
       let userCount = this.checkCode(userGuess, this.compCode, "user");
@@ -45,8 +60,11 @@ export default class Medium extends Play {
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, true, false, false, turns);
         return;
       }
+
+      // This can be put into a re-usable function
 
       // Computer guess functionality
       let random = Math.floor(Math.random() * Math.floor(this.codesArray.length));
@@ -57,6 +75,7 @@ export default class Medium extends Play {
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, false, false, true, turns);
         return;
       }
   
@@ -69,6 +88,7 @@ export default class Medium extends Play {
       if (turns > 7) {
         // End game here and declare the result a draw
         this.finishGame(this.form, this.resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, false, true, false, (turns - 1));
         return;
       }
       // Function to wait a second or so

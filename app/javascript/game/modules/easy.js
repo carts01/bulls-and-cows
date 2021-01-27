@@ -33,6 +33,16 @@ export default class Easy extends Play {
         return;
       }
 
+      // Show progress bar
+      if (this.progressBarContainer.classList.contains(this.classes.hidden)) {
+        this.progressBarContainer.classList.remove(this.classes.hidden);
+      }
+
+      // Update progress bar
+      const percentagePlayed = (turns / 7) * 100;
+      this.progressBar.style.width = `${percentagePlayed}%`;
+      this.progressBar.dataset.filled = turns;
+     
       // Check user guess against computer code and display results
       let userGuess = formatCode(this.guess.value);
       let userCount = this.checkCode(userGuess, this.compCode, "user");
@@ -41,6 +51,7 @@ export default class Easy extends Play {
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, true, false, false, turns);
         return;
       }
 
@@ -53,6 +64,7 @@ export default class Easy extends Play {
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, false, false, true, turns);
         return;
       }
   
@@ -64,6 +76,7 @@ export default class Easy extends Play {
       if (turns > 7) {
         // End game here and declare the result a draw
         this.finishGame(this.form, this.resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.saveGame(this.saveForm, false, true, false, (turns - 1));
         return;
       }
       // Function to wait a second or so before new round is available to play

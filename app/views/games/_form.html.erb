@@ -1,25 +1,15 @@
 <% if logged_in? %>
 
-  <%= form_with(model: @game, local: true) do |f| %>
-    <div>
-      <%= f.hidden_field :win, value: true %>
-    </div>
-    <div>
-      <%= f.hidden_field :draw, value: false %>
-    </div>
-    <div>
-      <%= f.hidden_field :loss, value: false %>
-    </div>
-    <div>
-      <%= f.hidden_field :turns, value: 7 %>
-    </div>
-    <div>
-    <%= f.submit 'Save game', disabled: 'disabled' %>
-    </div>
+  <%= form_with(model: @game, local: true, class: 'save-form hidden', id: 'save-form') do |f| %>
+    <%= f.hidden_field :win, value: false %>
+    <%= f.hidden_field :draw, value: false %>
+    <%= f.hidden_field :loss, value: false %>
+    <%= f.hidden_field :turns, value: 0 %>
+    <%= f.submit 'Save game', class: 'btn btn-default', disabled: 'disabled' %>
   <% end %>
 
 <% else %>
 
-<p>Log in to save game</p>
+<p class="login-save-link hidden"><%= link_to 'Log in', login_path %> to save game</p>
 
 <% end %>

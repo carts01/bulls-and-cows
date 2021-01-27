@@ -14,17 +14,32 @@ export default class Play {
     this.errorContainer = document.querySelector(this.selectors.errorContainer);
     this.playerTable = document.querySelector(this.selectors.playerTable);
     this.compTable = document.querySelector(this.selectors.compTable);
+
+    // Progress bar
+    this.progressBarContainer = document.querySelector(this.selectors.progressBarContainer);
+    this.progressBar = document.querySelector(this.selectors.progressBar);
+
+    // If logged in
+    this.saveForm = document.querySelector(this.selectors.saveForm);
   }
 
   selectors = {
     form: '#guessForm',
     guess: '#userGuess',
+    progressBarContainer: '.progress-bar-container',
+    progressBar: '.progress-bar-filled',
     messageContainer: '.message-container',
     resultContainer: '.result-container',
     errorContainer: '.guess-error',
     playerTable: '.players-table',
     compTable: '.comp-table',
-    replay: '.play-again'
+    replay: '.play-again',
+    saveForm: 'form[action="/games"]',
+    winResult: '#game_win',
+    drawResult: '#game_draw',
+    lossResult: '#game_loss',
+    turnsResult: '#game_turns',
+    loginSaveLink: '.login-save-link'
   }
 
   classes = {
@@ -138,6 +153,20 @@ export default class Play {
     const playAgain = document.querySelector(this.selectors.replay);
     playAgain.classList.remove(this.classes.hidden);
     playAgain.removeAttribute('disabled');
+  }
+
+  saveGame(form, win, draw, loss, turns) {
+    if (form !== null) {
+      form.querySelector(this.selectors.winResult).value = win;
+      form.querySelector(this.selectors.drawResult).value = draw;
+      form.querySelector(this.selectors.lossResult).value = loss;
+      form.querySelector(this.selectors.turnsResult).value = turns;
+      form.querySelector('input[type="submit"]').removeAttribute('disabled');
+      form.classList.remove(this.classes.hidden);
+    } else {
+      // Use localStorage or sessionStorage to save game results
+      document.querySelector(this.selectors.loginSaveLink).classList.remove(this.classes.hidden);
+    }
   }
 
 }
