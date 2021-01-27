@@ -18,14 +18,14 @@ export default class Medium extends Play {
     super();
   }
 
-  playGame(numberSet, computerCode, playerCode) {
+  playGame(codesArray, computerCode, playerCode) {
 
+    // Initialize values for codes, the computer's code and the player's code
+    this.codesArray = codesArray;
     this.compCode = computerCode;
     this.playerCode = playerCode;
-    this.numberSet = numberSet;
 
-    this.setup = new Setup();
-
+    // Initialize turns variable to 1 (each round increments this by 1)
     let turns = 1;
     
     this.form.addEventListener('submit', (event) => {
@@ -49,10 +49,8 @@ export default class Medium extends Play {
       }
 
       // Computer guess functionality
-      let random = Math.floor(Math.random() * Math.floor(this.numberSet.length));
-      let compGuess = this.numberSet[random];
-      console.log(compGuess);
-
+      let random = Math.floor(Math.random() * Math.floor(this.codesArray.length));
+      let compGuess = this.codesArray[random];
       let compCount = this.checkCode(compGuess, this.playerCode, "comp");
       let compIcons = this.displayIcons(compCount.bullCount, compCount.cowCount);
       this.displayTableRow(turns, compGuess, compIcons, this.compTable);
@@ -63,13 +61,9 @@ export default class Medium extends Play {
       }
   
       // Call refineNumberSet function to check for bulls and cows and refine number set accordingly
-      let afterGuess = this.refineNumberSet(this.playerCode, compGuess, this.numberSet);
-      this.numberSet = afterGuess;
-
-      console.log("-----------------------------------------------");
-      console.log(`After ${turns} turns`);
-      console.log("After array length: " + this.numberSet.length);
-      console.log("-----------------------------------------------");
+      let afterGuess = this.refineCodesArray(this.playerCode, compGuess, this.codesArray);
+      this.codesArray = afterGuess;
+      console.log(this.codesArray);
   
       turns++;
       if (turns > 7) {
@@ -84,14 +78,15 @@ export default class Medium extends Play {
 
   }
 
-  refineNumberSet(code, guess, numbers) {
+  refineCodesArray(code, guess, numbers) {
     let originalArray = numbers;
-    let guessIndex = originalArray.indexOf(guess);
-    if (guessIndex !== -1) {
-      originalArray.splice(guessIndex, 1);
-    }
+    // Find index of guess and then remove it from the array so it can't be guessed again
+    const guessIndex = originalArray.indexOf(guess);
+    originalArray.splice(guessIndex, 1);
  
+    // Loop through the digits of the guess and check if there are any bulls and/or cows
     for (let i = 0; i < guess.length; i++) {
+      // If there is a bull then filter array to remove non-matching codes
         if (code[i] == guess[i]) {
           let bull = guess[i];
   
@@ -102,17 +97,20 @@ export default class Medium extends Play {
           originalArray = filteredArray;
 
         } else {
-
+          // If there isn't a bull, then loop through and check for cows
           for (let j = 0; j < guess.length; j++) {
               if (code[i] == guess[j]) {
-                let cow = parseInt(code[i]);
-  
+                let cow = code[i];
+
+                // If there is a cow then filter out all codes that don't include this digit
+                // Also need to filter out codes with the cow but in the wrong position
                 let filteredArray = originalArray.filter((num) => {
-                  return (num.includes(cow));
+                  return (num.includes(cow) && num[j] != code[i]);
                 });
   
                 originalArray = filteredArray;
-              }
+
+              } 
           }
       }
     }

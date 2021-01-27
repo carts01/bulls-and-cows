@@ -6,6 +6,7 @@ import cowSVG from '../../images/sacred-cow.svg';
 
 export default class Play {
 
+  // Set up DOM elements for game play UI
   constructor () {
     this.form = document.querySelector(this.selectors.form);
     this.guess = document.querySelector(this.selectors.guess);
@@ -32,9 +33,10 @@ export default class Play {
   }
 
   playGame(compCode, playerCode) {
-    console.log('to be overridden in level-specific classes');
+    console.log('This is overridden for each specific level');
   }
 
+  // Function which checks the guess against the code and returns the number of bulls
   getBulls(code, guess) {
     let bullCount = 0;
     let bulls = [];
@@ -51,11 +53,13 @@ export default class Play {
     return bullCount;
   }
 
+  // Function which checks the guess against the code and returns the number of cows
   getCows(code, guess) {
     let cowCount = 0;
     let cows = [];
 
     for (let i = 0; i < code.length; i++) {
+      // Only check for a cow if it is not a bull
       if (code[i] != guess[i]) {
         for (let j = 0; j < guess.length; j++) {
           if (code[i] == guess[j]) {
@@ -69,15 +73,11 @@ export default class Play {
     return cowCount;
   }
 
+  // Function which checks the code and returns both the number of bulls and cows for that guess
   checkCode(guess, code, player) {
-
     if (player == "user") {
       let bullCount = this.getBulls(code, guess);
       let cowCount = this.getCows(code, guess);
-      console.log("-------Player----------")
-      console.log("Player guess: " + guess);
-      console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
-      console.log(" ")
       return {
         bullCount,
         cowCount
@@ -85,18 +85,14 @@ export default class Play {
     } else if (player == "comp") {
       let bullCount = this.getBulls(code, guess);
       let cowCount = this.getCows(code, guess);
-      console.log("-------Computer----------")
-      console.log("Comp guess: " + guess);
-      console.log("Bulls: " + bullCount + " / Cows: " + cowCount)
-      console.log(" ")
       return {
         bullCount,
         cowCount
       }
     }
-
   }
 
+  // Function that creates table rows for each round of the game
   displayTableRow(turn, guess, icons, table) {
     if (table.classList.contains(this.classes.hidden)) {
       table.classList.remove(this.classes.hidden);
@@ -112,6 +108,7 @@ export default class Play {
     tableBody.appendChild(tableRow);
   }
 
+  // Function thats returns a number of bull and cow icons based on the number of bulls/cows guessed
   displayIcons(bullCount, cowCount) {
     const bullList = document.createElement('div');
     const bullIcons = document.createElement('div');
@@ -134,6 +131,7 @@ export default class Play {
      }
   }
 
+  // Function that outputs the result of the game and sets up the play again button 
   finishGame(form, element, message, playerCode, compCode) {
     form.classList.add(this.classes.hidden);
     element.textContent = `Your code: ${playerCode} / Computer's code: ${compCode} / Result: ${message}`;

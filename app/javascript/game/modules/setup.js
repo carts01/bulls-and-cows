@@ -14,6 +14,7 @@ export default class Setup {
     }
   }
 
+  // Function to generate a random computer opponent - not currently used
   generateComputerPlayer() {
     const players = ["Lionel", "Alice", "Bruce", "Jacob", "Judy", "Eric", "Leroy", "Sandra", "Mary"];
     const random = Math.floor(Math.random() * Math.floor(players.length));
@@ -21,6 +22,7 @@ export default class Setup {
     return players[random];
   }
 
+  // Function to create a unique set of 5040 codes - not currently used
   createNumberSet() {
     const numberSet = new Set();
     while (numberSet.size < 5040) {
@@ -36,6 +38,7 @@ export default class Setup {
     return numberSet;
   }
 
+  // Function to return a four digit code
   getComputerCode(code = []) {
     // Initialize digits array to hold 10 digits from 0-9
     const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -50,24 +53,6 @@ export default class Setup {
     // console.log(code);
     // Return the final code
     return code;
-}
-
-
-  getPlayerCode (code = []) {
-
-  // Initialize digits array to hold 10 digits from 0-9
-  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  // Iterate four times and add one random digit from the digits array to the code each time
-  for (let i = 0; i < 4; i++) {
-    let randomIndex = Math.floor(Math.random() * digits.length);
-    code[i] = digits[randomIndex];
-    digits.splice(randomIndex, 1);
-  }
-
-  // console.log(code);
-  // Return the final code
-  return code;
 }
 
 }

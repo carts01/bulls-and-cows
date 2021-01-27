@@ -9,7 +9,6 @@ export function formatCode(code) {
 }
 
 export function formatGuess(guess) {
-  //const digits = guess.split(',');
   const number = guess.join('');
   return number;
 }

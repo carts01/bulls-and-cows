@@ -28,9 +28,19 @@ class Play {
   
   start(userCode, levelCode) {
 
+    // Get set of 5040 unique codes
+    const codesArray = codes();
+
+    // Set up computer player (code, name and level)
     const setup = new Setup();
-    let comp = setup.getComputerCode();
+    const comp = setup.getComputerCode();
+    const computerName = capitalize(levelCode);
+    const level = levelSelection(levelCode);
  
+    // Set up user player
+    const player = formatCode(userCode);
+    /* Need to get name of player */
+
     // Create set
     // let numberSet = setup.createNumberSet();
 
@@ -40,25 +50,13 @@ class Play {
      //  return formatCode(num);
     // });
 
-   // console.log(numberSet);
-   // console.log(numberArray);
-   // console.log(codesArray);
-    
-    let codesArray = codes();
-
-    let player = formatCode(userCode);
-    let level = levelSelection(levelCode);
-    const computerName = capitalize(levelCode);
-    //let computerName = setup.generateComputerPlayer();
-
-    console.log(comp);
-    console.log(player)
-    console.log(level);
-
-    const easy = new Easy();
-    const medium = new Medium();
-    const hard = new Hard();
-
+    // Set up the game UI 
+    /*
+      - Hide original code submission form
+      - Show new guessing form
+      - Show user's secret code
+      - Set up table to display results of each round
+    */
     const codeForm = document.querySelector(this.selectors.codeForm);
     const guessForm = document.querySelector(this.selectors.guessForm);
     const userCodeContainer = document.querySelector(this.selectors.showUser);
@@ -72,34 +70,40 @@ class Play {
     compTableName.textContent = computerName;
     playerTableName.textContent = 'Player X';
 
+    // Initialize and play game of selected level
     if (level == 1) {
-      console.log("easy level selected");
+      const easy = new Easy();
       easy.playGame(codesArray, comp, player);
     } else if (level == 2) {
-      console.log("medium level selected");
+      const medium = new Medium();
       medium.playGame(codesArray, comp, player);
     } else if (level == 3) {
-      console.log("hard level selected");
+      const hard = new Hard();
       hard.playGame(codesArray, comp, player);
     }
 
   }
+
 }
 
 document.addEventListener('turbolinks:load', function() {
+  // On document load - initialize Play class
   const game = new Play();
+  // Set up selectors for initial code submission stage
   const form = document.querySelector(game.selectors.codeForm);
-  const codeInput = document.querySelector(game.selectors.userCode);
   const errorContainer = document.querySelector(game.selectors.error);
   const playAgain = document.querySelector(game.selectors.replay);
   const radioLevel = document.querySelectorAll(game.selectors.radioLevel);
+  const codeInput = document.querySelector(game.selectors.userCode);
   codeInput.focus();
 
+  // Add event listener on initial code submission form
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    // Get selected level and user code
     const levelCode = getRadioValue(radioLevel);
-    console.log(event);
     const userCode = codeInput.value;
+    // Check that user code is valid - if so start game else return
     const validCode = validateCode(userCode, errorContainer, codeInput);
     if (validCode) {
       game.start(userCode, levelCode);
@@ -108,6 +112,7 @@ document.addEventListener('turbolinks:load', function() {
     }
   });
 
+  // Add event listener for playing again (this is hidden until game is complete)
   playAgain.addEventListener('click', (event) => {
     event.preventDefault();
     location.reload();
