@@ -48,4 +48,14 @@ module GameHelper
     game.user.username
   end
 
+  def display_percentage(games, result)
+    # (wins / games) * 100
+    if games == 0 || result == 0
+      percentage = 0
+    else
+      percentage = (result.to_f / games.to_f) * 100
+    end
+    "#{percentage.round(2)}%"
+  end
+
 end

@@ -1,5 +1,5 @@
 <% if obj.errors.any? %>
   <% obj.errors.full_messages.each do |message| %>
-    <p class="error-message"><%= message %></p>
+    <p class="terminal-alert terminal-alert-error"><%= message %></p>
   <% end %>  
 <% end %>

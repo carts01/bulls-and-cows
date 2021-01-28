@@ -21,7 +21,7 @@ class GamesController < ApplicationController
     @game.user = current_user
     if @game.save
       flash[:notice] = "Game saved!"
-      redirect_to @game
+      redirect_to @game.user
     else
       render 'new'
     end

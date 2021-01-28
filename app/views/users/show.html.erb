@@ -1,36 +1,35 @@
 <h1>User profile</h1>
 
-<p><%= @user.firstname + " " + @user.lastname %></p>
-<p><%= @user.username %></p>
-<p><%= @user.email %></p>
+<p>Name: <%= @user.firstname + " " + @user.lastname %></p>
+<p>Email: <%= @user.email %></p>
+<p>Username: <%= @user.username %></p>
 
-<p>Games played - <%= @games.count %></p>
-<p>Wins - <%= get_wins(@games) %></p>
-<p>Draws - <%= get_draws(@games) %></p>
-<p>Losses - <%= get_losses(@games) %></p>
-
-<table>
+<table class="user-results-table">
+  <caption>Results</caption>
   <thead>
    <tr>
+    <th>Games</th>
     <th>Wins</th>
     <th>Draws</th>
     <th>Losses</th>
     <th>Winning percentage</th>
+    <th>Average turns per game</th>
    </tr>
   <thead>
   <tbody>
       <tr>
+        <td><%= @games.count %></td>
         <td><%= get_wins(@games)  %></td>
         <td><%= get_draws(@games) %></td>
         <td><%= get_losses(@games)  %></td>
-        <td><%= (get_wins(@games) / @games.count.to_f).round(2) * 100 %></td>
+        <td><%= display_percentage(@games.count, get_wins(@games)) %></td>
+        <td><%= (get_total_turns(@games) / @games.length.to_f).round(2) %></td>
       </tr>
   </tbody>
 </table>
 
-<p>Average turns per game - <%= (get_total_turns(@games) / @games.length.to_f).round(2) %></p>
-
 <% if logged_in? && current_user == @user %>
+  <%= link_to "Play New Game", play_path, class: 'btn btn-default' %>
   <%= link_to "Edit account", edit_user_path(@user), class: 'edit_link waves-effect waves-light btn green darken-2' %>
   <%= link_to "Log out", logout_path, class: 'logout_link waves-effect waves-light btn green darken-2' %>
 <% end %>
