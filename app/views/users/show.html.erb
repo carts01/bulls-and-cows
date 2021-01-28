@@ -5,7 +5,7 @@
 <p>Username: <%= @user.username %></p>
 
 <table class="user-results-table">
-  <caption>Results</caption>
+  <caption>Summary</caption>
   <thead>
    <tr>
     <th>Games</th>
@@ -25,6 +25,36 @@
         <td><%= display_percentage(@games.count, get_wins(@games)) %></td>
         <td><%= (get_total_turns(@games) / @games.length.to_f).round(2) %></td>
       </tr>
+  </tbody>
+</table>
+
+<table class="user-results-list-table">
+  <caption>Games</caption>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Date</th>
+      <th>Result</th>
+      <th>Level</th>
+      <th>Turns</th>
+      <th>Your code</th>
+      <th>Comp code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% count = 1 %>
+    <% @games.each do |game| %>
+      <tr>
+        <td><%= count %></td>
+        <td><%= game.created_at %></td>
+        <td><%= show_game_result(game) %>
+        <td><%= game.level %></td>
+        <td><%= game.turns %></td>
+        <td><%= game.user_code %></td>
+        <td><%= game.comp_code %></td>
+      </tr>
+      <% count += 1 %>
+    <% end %>  
   </tbody>
 </table>
 

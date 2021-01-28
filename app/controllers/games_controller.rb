@@ -34,7 +34,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:win, :draw, :loss, :turns, :user_id)
+    params.require(:game).permit(:win, :draw, :loss, :turns, :level, :user_code, :comp_code, :user_id)
   end
 
 end

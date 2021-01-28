@@ -8,9 +8,6 @@ class UsersController < ApplicationController
 
   def show
     @games = @user.games
-    @wins = @user.games.where(win: true)
-    @draws = @user.games.where(draw: true)
-    @losses = @user.games.where(loss: true)
   end
 
   def new

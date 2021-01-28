@@ -58,4 +58,16 @@ module GameHelper
     "#{percentage.round(2)}%"
   end
 
+  def show_game_result(game)
+    if game.win == true 
+      "Win"
+    elsif game.draw == true 
+      "Draw"
+    elsif game.loss == true 
+      "Loss"
+    else
+      "No result"
+    end
+  end
+
 end
