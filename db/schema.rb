@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_064041) do
+ActiveRecord::Schema.define(version: 2021_01_28_181752) do
 
   create_table "games", force: :cascade do |t|
     t.boolean "win", default: false
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 2020_12_17_064041) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "level"
+    t.string "user_code"
+    t.string "comp_code"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
