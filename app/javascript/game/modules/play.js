@@ -39,6 +39,9 @@ export default class Play {
     drawResult: '#game_draw',
     lossResult: '#game_loss',
     turnsResult: '#game_turns',
+    levelResult: '#game_level',
+    userCodeResult: '#game_user_code',
+    compCodeResult: '#game_comp_code',
     loginSaveLink: '.login-save-link'
   }
 
@@ -155,16 +158,20 @@ export default class Play {
     playAgain.removeAttribute('disabled');
   }
 
-  saveGame(form, win, draw, loss, turns) {
+  saveGame(form, win, draw, loss, turns, level, userCode, compCode) {
     if (form !== null) {
       form.querySelector(this.selectors.winResult).value = win;
       form.querySelector(this.selectors.drawResult).value = draw;
       form.querySelector(this.selectors.lossResult).value = loss;
       form.querySelector(this.selectors.turnsResult).value = turns;
+      form.querySelector(this.selectors.levelResult).value = level;
+      form.querySelector(this.selectors.userCodeResult).value = userCode;
+      form.querySelector(this.selectors.compCodeResult).value = compCode;
       form.querySelector('input[type="submit"]').removeAttribute('disabled');
       form.classList.remove(this.classes.hidden);
     } else {
-      // Use localStorage or sessionStorage to save game results
+      // Use localStorage or sessionStorage to store game results so once user is logged in or signed up
+      // the game will still be saved
       document.querySelector(this.selectors.loginSaveLink).classList.remove(this.classes.hidden);
     }
   }

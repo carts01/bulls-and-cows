@@ -66,7 +66,19 @@ module GameHelper
     elsif game.loss == true 
       "Loss"
     else
-      "No result"
+      "N/A"
+    end
+  end
+
+  def show_game_level(game)
+    if game.level == 1 
+      "Easy"
+    elsif game.level == 2 
+      "Medium"
+    elsif game.level. == 3
+      "Hard"
+    else
+      "N/A"
     end
   end
 

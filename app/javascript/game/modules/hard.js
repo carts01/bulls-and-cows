@@ -25,6 +25,9 @@ export default class Medium extends Play {
     this.compCode = computerCode;
     this.playerCode = playerCode;
 
+     // Initialize level variable
+     const level = 3;
+
     // Initialize turns variable to 1 (each round increments this by 1)
     let turns = 1;
     
@@ -60,7 +63,7 @@ export default class Medium extends Play {
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
-        this.saveGame(this.saveForm, true, false, false, turns);
+        this.saveGame(this.saveForm, true, false, false, turns, level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
 
@@ -75,7 +78,7 @@ export default class Medium extends Play {
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
         this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
-        this.saveGame(this.saveForm, false, false, true, turns);
+        this.saveGame(this.saveForm, false, false, true, turns, level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
   
@@ -88,7 +91,7 @@ export default class Medium extends Play {
       if (turns > 7) {
         // End game here and declare the result a draw
         this.finishGame(this.form, this.resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
-        this.saveGame(this.saveForm, false, true, false, (turns - 1));
+        this.saveGame(this.saveForm, false, true, false, (turns - 1), level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
       // Function to wait a second or so

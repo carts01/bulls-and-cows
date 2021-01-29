@@ -3,11 +3,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
-    @users = User.all
+    # @users = User.all
+    # Show 20 users per page and then paginate
+    @users = User.paginate(:page => params[:page], :per_page => 20)
   end
 
   def show
-    @games = @user.games
+    # @games = @user.games
+    # Show 20 game results per page and then paginate
+    @games = @user.games.paginate(page: params[:page], per_page: 120)
   end
 
   def new

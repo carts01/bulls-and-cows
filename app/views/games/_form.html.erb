@@ -5,6 +5,9 @@
     <%= f.hidden_field :draw, value: false %>
     <%= f.hidden_field :loss, value: false %>
     <%= f.hidden_field :turns, value: 0 %>
+    <%= f.hidden_field :level, value: 1 %>
+    <%= f.hidden_field :user_code, value: " " %>
+    <%= f.hidden_field :comp_code, value: " " %>
     <%= f.submit 'Save game', class: 'btn btn-default', disabled: 'disabled' %>
   <% end %>
 
