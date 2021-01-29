@@ -46,7 +46,7 @@
     <% @games.each do |game| %>
       <tr>
         <td><%= count %></td>
-        <td><%= game.created_at %></td>
+        <td><%= format_date(game.created_at) %></td>
         <td><%= show_game_result(game) %>
         <td><%= show_game_level(game) %></td>
         <td><%= game.turns %></td>

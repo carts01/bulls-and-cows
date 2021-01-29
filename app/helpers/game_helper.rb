@@ -82,4 +82,8 @@ module GameHelper
     end
   end
 
+  def format_date(date_string)
+    date_string.strftime("%d/%m/%Y")
+  end
+
 end
