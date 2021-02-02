@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_181752) do
+ActiveRecord::Schema.define(version: 2021_02_02_021759) do
 
   create_table "games", force: :cascade do |t|
     t.boolean "win", default: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_01_28_181752) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.boolean "admin", default: false
   end
 
 end
