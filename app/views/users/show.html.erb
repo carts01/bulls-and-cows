@@ -1,67 +1,85 @@
-<h1>User profile</h1>
-
-<p>Name: <%= @user.firstname + " " + @user.lastname %></p>
-<p>Email: <%= @user.email %></p>
-<p>Username: <%= @user.username %></p>
-
-<table class="user-results-table">
-  <caption>Summary</caption>
-  <thead>
-   <tr>
-    <th>Games</th>
-    <th>Wins</th>
-    <th>Draws</th>
-    <th>Losses</th>
-    <th>Winning percentage</th>
-    <th>Average turns per game</th>
-   </tr>
-  <thead>
-  <tbody>
-      <tr>
-        <td><%= @games.count %></td>
-        <td><%= get_wins(@games)  %></td>
-        <td><%= get_draws(@games) %></td>
-        <td><%= get_losses(@games)  %></td>
-        <td><%= display_percentage(@games.count, get_wins(@games)) %></td>
-        <td><%= (get_total_turns(@games) / @games.length.to_f).round(2) %></td>
-      </tr>
-  </tbody>
-</table>
-
-<table class="user-results-list-table">
-  <caption>Games</caption>
-  <thead>
-    <tr>
-      <th>Game</th>
-      <th>Date</th>
-      <th>Result</th>
-      <th>Level</th>
-      <th>Turns</th>
-      <th>Your code</th>
-      <th>Comp code</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% count = 1 %>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= count %></td>
-        <td><%= format_date(game.created_at) %></td>
-        <td><%= show_game_result(game) %>
-        <td><%= show_game_level(game) %></td>
-        <td><%= game.turns %></td>
-        <td><%= game.user_code %></td>
-        <td><%= game.comp_code %></td>
-      </tr>
-      <% count += 1 %>
-    <% end %>  
-  </tbody>
-</table>
-
-<%= will_paginate @games %>
+<div class="user-controls">
+  <div class="user-controls--details">
+    <p><strong>User profile</strong></p>
+    <p>Name: <%= @user.firstname + " " + @user.lastname %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Username: <%= @user.username %></p>
+  </div>
+  <div class="user-controls--buttons">
+    <% if logged_in? && current_user == @user %>
+      <%= link_to "Log out", logout_path, class: 'btn btn-default btn-ghost btn--narrow' %>
+      <%= link_to "Edit your profile", edit_user_path(@user), class: 'btn btn-default btn-ghost btn--narrow' %>
+      <%= link_to 'Delete your account', user_path(@user), class: "btn btn-error btn-ghost btn--narrow", method: :delete, data: { confirm: "Are you sure?"} %>
+    <% end %>
+  </div>
+</div> 
 
 <% if logged_in? && current_user == @user %>
-  <%= link_to "Play New Game", play_path, class: 'btn btn-default' %>
-  <%= link_to "Edit account", edit_user_path(@user), class: 'edit_link waves-effect waves-light btn green darken-2' %>
-  <%= link_to "Log out", logout_path, class: 'logout_link waves-effect waves-light btn green darken-2' %>
+  <div class="new-game-container">
+    <%= link_to "Play New Game", play_path, class: 'btn btn-default' %>
+  </div>
 <% end %>
+
+<% if @games.count > 0 %>
+  <table class="user-results-table">
+    <caption>Summary</caption>
+    <thead>
+    <tr>
+      <th>Games</th>
+      <th>Wins</th>
+      <th>Draws</th>
+      <th>Losses</th>
+      <th>Winning percentage</th>
+      <th>Average turns per game</th>
+    </tr>
+    <thead>
+    <tbody>
+        <tr>
+          <td><%= @games.count %></td>
+          <td><%= get_wins(@games)  %></td>
+          <td><%= get_draws(@games) %></td>
+          <td><%= get_losses(@games)  %></td>
+          <td><%= display_percentage(@games.count, get_wins(@games)) %></td>
+          <td><%= (get_total_turns(@games) / @games.length.to_f).round(2) %></td>
+        </tr>
+    </tbody>
+  </table>
+
+  <table class="user-results-list-table">
+    <caption>Games</caption>
+    <thead>
+      <tr>
+        <th>Game</th>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Level</th>
+        <th>Turns</th>
+        <th>Your code</th>
+        <th>Comp code</th>
+        <% if logged_in? && current_user == @user %>
+        <th>Delete</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% count = 1 %>
+      <% @games.each do |game| %>
+        <tr>
+          <td><%= count %></td>
+          <td><%= format_date(game.created_at) %></td>
+          <td><%= show_game_result(game) %>
+          <td><%= show_game_level(game) %></td>
+          <td><%= game.turns %></td>
+          <td><%= game.user_code %></td>
+          <td><%= game.comp_code %></td>
+          <% if logged_in? && current_user == @user %>
+          <td><%= link_to 'X', game_path(game), class: "delete-link no-hover", method: :delete, data: { confirm: "Are you sure?"} %></td>
+          <% end %>
+        </tr>
+        <% count += 1 %>
+      <% end %>  
+    </tbody>
+  </table>
+<% end %>
+
+<%= will_paginate @games %>

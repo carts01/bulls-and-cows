@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:edit, :update, :destroy]
 
   def index
     # @users = User.all
@@ -21,6 +22,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      # Log in newly created user
+      session[:user_id] = @user.id
+      flash[:notice] = "Welcome #{@user.username}!"
       redirect_to @user
     else
       render :new
@@ -38,6 +42,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    # delete user and set session to be equal to nil
+    @user.destroy
+    session[:user_id] = nil unless @user != current_user
+    flash[:notice] = "Account deleted"
+    redirect_to root_path
+  end
+
   private
 
   def set_user
@@ -46,6 +58,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :username, :email, :password)
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "You can only edit or delete your own profile"
+      redirect_to @user
+    end
   end
 
 end

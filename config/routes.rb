@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
 
   get 'play', to: 'games#new'
-  resources :games, except: [:new, :edit, :update, :destroy]
+  resources :games, except: [:new, :edit, :update]
 
 end

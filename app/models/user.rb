@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   # Set up association - a user can have many games
+  # If a user is deleted - all of their games will also be deleted
   has_many :games, dependent: :destroy
 
   before_save { self.email = email.downcase }

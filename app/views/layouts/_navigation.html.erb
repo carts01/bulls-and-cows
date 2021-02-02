@@ -30,6 +30,9 @@
           </li>
           <% if logged_in? %>
             <li>
+             <%= link_to current_user.username, user_path(current_user), class: 'menu-item' %>
+            </li>
+            <li>
               <%= link_to 'Log out', logout_path, class: 'menu-item' %>
             </li>
           <% else %>

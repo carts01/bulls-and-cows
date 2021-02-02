@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-  before_action :set_game, only: [:show]
+  before_action :set_game, only: [:show, :destroy]
   # before_action :require_user, except: [:show, :index]
 
   def show
@@ -25,6 +25,11 @@ class GamesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @game.destroy
+    redirect_to games_path
   end
 
   private
