@@ -17,7 +17,8 @@ class Play {
     playerTableName: '.players-table--name',
     error: '.code-error',
     replay: '.play-again',
-    radioLevel: '[name="level-group"]'
+    radioLevel: '[name="level-group"]',
+    sessionUserName: '#sessionUserName'
   }
 
   classes = {
@@ -35,6 +36,7 @@ class Play {
     const setup = new Setup();
     const comp = setup.getComputerCode();
     const computerName = capitalize(levelCode);
+    const playerName = document.querySelector(this.selectors.sessionUserName);
     const level = levelSelection(levelCode);
  
     // Set up user player
@@ -63,23 +65,24 @@ class Play {
     const userGuessLabel = document.querySelector(this.selectors.userGuessLabel);
     const compTableName = document.querySelector(this.selectors.compTableName);
     const playerTableName = document.querySelector(this.selectors.playerTableName);
+    
     codeForm.classList.add(this.classes.hidden);
     guessForm.classList.remove(this.classes.hidden);
     userCodeContainer.textContent = `Your secret code is ${userCode}`;
     userGuessLabel.textContent = `Guess ${computerName}'s secret code`;
     compTableName.textContent = computerName;
-    playerTableName.textContent = 'Player X';
+    playerTableName.textContent = playerName !== null ? playerName.value : 'Guest';
 
     // Initialize and play game of selected level
     if (level == 1) {
       const easy = new Easy();
-      easy.playGame(codesArray, comp, player);
+      easy.playGame(codesArray, comp, player, computerName, playerName);
     } else if (level == 2) {
       const medium = new Medium();
-      medium.playGame(codesArray, comp, player);
+      medium.playGame(codesArray, comp, player, computerName, playerName);
     } else if (level == 3) {
       const hard = new Hard();
-      hard.playGame(codesArray, comp, player);
+      hard.playGame(codesArray, comp, player, computerName, playerName);
     }
 
   }
@@ -95,15 +98,32 @@ document.addEventListener('turbolinks:load', function() {
   const playAgain = document.querySelector(game.selectors.replay);
   const radioLevel = document.querySelectorAll(game.selectors.radioLevel);
   const codeInput = document.querySelector(game.selectors.userCode);
-  codeInput.focus();
+  if (codeInput !== null || codeInput !== undefined) {
+    codeInput.focus();
+  }
+
+  // Set pre-checked input to be equal to the last level selected
+  const preferredLevel = localStorage.getItem('preferredLevel');
+  if (preferredLevel == 'bruce') {
+    console.log('bruce');
+    radioLevel[0].checked = true;
+  } else if (preferredLevel == 'judy') {
+    console.log('judy');
+    radioLevel[1].checked = true;
+  } else if (preferredLevel == 'lionel') {
+    console.log('lionel');
+    radioLevel[2].checked = true;
+  }
 
   // Add event listener on initial code submission form
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     // Get selected level and user code
     const levelCode = getRadioValue(radioLevel);
+    // Save selected level using localStorage
+    localStorage.setItem('preferredLevel', levelCode);
+    // Get user code and check it is valid - if so start game else return
     const userCode = codeInput.value;
-    // Check that user code is valid - if so start game else return
     const validCode = validateCode(userCode, errorContainer, codeInput);
     if (validCode) {
       game.start(userCode, levelCode);

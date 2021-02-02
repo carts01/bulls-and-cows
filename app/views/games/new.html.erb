@@ -1,35 +1,39 @@
 <h1>Play new game</h1>
 
 <div class="container">
-    <h1>This is the home page</h1>
-
     <div class="form-container">
         <form action="" method="get" id="codeForm" class="col s12">
             <fieldset>
-                <h4>Choose a unique four digit code:</h4>
-                    <div class="form-group">
+
+            <% if logged_in? %>
+            <h4>Welcome <%= current_user.username %>!</h4>
+            <input type='hidden' id='sessionUserName' value='<%= current_user.username %>'>
+            <% end %>
+            
+            <h4>Choose a unique four digit code:</h4>
+                <div class="form-group">
                         <label for="userCode" class="hidden">Enter code</label>
                         <input type="text" id="userCode" class="validate" placeholder="Enter code">
                         <span class="error code-error hidden"></span>
-                    </div>
+                </div>
                 <h4>Select an opponent:</h4>
-                    <div class="form-group">
-                        <label>
-                        <input name="level-group" type="radio" value="bruce" checked />
-                        <span>Bruce (easy)</span>
-                        </label>
-                        <label>
-                        <input name="level-group" type="radio" value="judy" />
-                        <span>Judy (medium)</span>
-                        </label>
-                        <label>
-                        <input name="level-group" type="radio" value="lionel" />
-                        <span>Lionel (hard)</span>
-                        </label>
-                    </div>
-                    <div class="form-group">
+                <div class="form-group">
+                    <label>
+                    <input name="level-group" type="radio" value="bruce" checked />
+                    <span>Bruce (easy)</span>
+                    </label>
+                    <label>
+                    <input name="level-group" type="radio" value="judy" />
+                    <span>Judy (medium)</span>
+                    </label>
+                    <label>
+                    <input name="level-group" type="radio" value="lionel" />
+                    <span>Lionel (hard)</span>
+                    </label>
+                </div>
+                <div class="form-group">
                     <input class="btn btn-default" type="submit" value="Submit your secret code!">
-                    </div>
+                </div>
             </fieldset>
         </form>
     </div>

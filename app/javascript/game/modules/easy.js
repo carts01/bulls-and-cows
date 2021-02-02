@@ -10,12 +10,14 @@ export default class Easy extends Play {
     super();
   }
 
-  playGame(codesArray, computerCode, playerCode) {
+  playGame(codesArray, computerCode, playerCode, computerName, playerName) {
 
     // Initialize values for codes, the computer's code and the player's code
     this.codesArray = codesArray;
     this.compCode = computerCode;
     this.playerCode = playerCode;
+    this.computerName = computerName;
+    this.playerName = playerName;
 
     // Initialize Setup class (used to get computer guesses)
     this.setup = new Setup();
@@ -53,7 +55,7 @@ export default class Easy extends Play {
       this.displayTableRow(turns, userGuess, userIcons, this.playerTable);
       if (userCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        this.finishGame(this.form, this.resultContainer, "Player wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(this.form, this.resultContainer, `${this.playerName} wins!`, formatGuess(this.playerCode), formatGuess(this.compCode));
         this.saveGame(this.saveForm, true, false, false, turns, level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
@@ -66,7 +68,7 @@ export default class Easy extends Play {
       this.displayTableRow(turns, compGuess, compIcons, this.compTable);
       if (compCount.bullCount == 4) {
         // End game here and stop computer from guessing
-        this.finishGame(this.form, this.resultContainer, "Computer wins", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(this.form, this.resultContainer, `${this.computerName} wins!`, formatGuess(this.playerCode), formatGuess(this.compCode));
         this.saveGame(this.saveForm, false, false, true, turns, level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
@@ -78,7 +80,7 @@ export default class Easy extends Play {
       turns++;
       if (turns > 7) {
         // End game here and declare the result a draw
-        this.finishGame(this.form, this.resultContainer, "Draw", formatGuess(this.playerCode), formatGuess(this.compCode));
+        this.finishGame(this.form, this.resultContainer, "It's a tie!", formatGuess(this.playerCode), formatGuess(this.compCode));
         this.saveGame(this.saveForm, false, true, false, (turns - 1), level, formatGuess(this.playerCode), formatGuess(this.compCode));
         return;
       }
