@@ -1,3 +1,25 @@
+@import 'variables';
+
+// Home page
+.home-page__icons {
+  margin-bottom: $site-padding ;
+
+  .svg-icon {
+    height: 72px;
+    width: 72px;
+  }
+}
+
+.button-break {
+  margin-top: $site-padding ;
+}
+
+// Instructions page
 .instructions {
-  margin-top: 30px;
+  margin-top: $site-padding;
+}
+
+.instructions-link {
+  display: block;
+  margin-top: $site-padding / 2;
 }

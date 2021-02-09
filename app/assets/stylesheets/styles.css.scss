@@ -1,3 +1,4 @@
+@import 'modules/variables';
 @import 'modules/utilities';
 @import 'modules/header';
 @import 'modules/game';
@@ -12,21 +13,5 @@ body {
 
 main {
   flex: 1 0 auto;
-}
-
-.page-footer {
-  padding: 30px;
-  border-top: solid 2px #235c15;
-
-  .footer-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-
-  .footer-icons--message {
-    margin: 0 15px;
-  }
 }
 

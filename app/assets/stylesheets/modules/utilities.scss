@@ -1,24 +1,8 @@
-.hidden {
-  display: none !important;
-}
-
-.error {
-  color: #F44336;
-  font-weight: bold;
-}
-
-input[type="text"].invalid {
-  border-color: #F44336;
-}
-
-.svg-icon {
-  height: 22px;
-  width: 22px;
-}
+@import 'variables';
 
 .page-width {
-  max-width: 1200px;
-  padding: 0 30px;
+  max-width: $site-width;
+  padding: 0 $site-padding;
   margin: 0 auto;
 }
 
@@ -26,35 +10,53 @@ input[type="text"].invalid {
   text-align: center;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.error {
+  color: $error-color;
+  font-weight: bold;
+}
+
+input[type="text"].invalid {
+  border-color: $error-color;
+}
+
+.svg-icon {
+  height: 22px;
+  width: 22px;
+}
+
 .btn-margin {
-  margin-top: 15px;
+  margin-top: $site-padding / 2;
 }
 
 .sign-up-message {
-  margin-top: 30px;
+  margin-top: $site-padding;
 }
 
 .flash-messages {
-  margin: 30px 0 30px 0;
+  margin: $site-padding  0 $site-padding  0;
 
   .alert {
-    color: #F44336;
+    color: $error-color;
     font-weight: bold;
   }
   .notice {
-    color: green;
+    color: $success-color;
     font-weight: bold;
   }
 }
 
 .delete-link {
-  color: #F44336;
+  color: $error-color;
   font-weight: bold;
 }
 
 .pagination {
   text-align: center;
-  margin: 30px 0;
+  margin: $site-padding  0;
 }
 
 .no-hover {
@@ -68,24 +70,5 @@ input[type="text"].invalid {
   .h1 {
     font-size: 36px;
     display: block;
-    //color: #235c15;
   }
-}
-
-.button-break {
-  margin-top: 30px;
-}
-
-.home-page__icons {
-  margin-bottom: 30px;
-
-  .svg-icon {
-    height: 72px;
-    width: 72px;
-  }
-}
-
-.instructions-link {
-  display: block;
-  margin-top: 15px;
 }

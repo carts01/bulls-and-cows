@@ -1,7 +1,8 @@
+@import 'variables';
+
 .header {
-  padding: 0 30px;
-  // background-color: green;
-  border-bottom: solid 2px #235c15;
+  padding: 0 $site-padding;
+  border-bottom: solid 2px $secondary-color;
 
   .logo {
     display: flex;
@@ -11,7 +12,7 @@
     }
 
     .logo-item--line {
-      background-color: black;
+      background-color: $primary-color;
       width: 4px;
       height: 48px;
       margin: 0 8px;
@@ -33,10 +34,10 @@
     .logo-link {
       display: flex;
       flex-direction: column;
-      color: black;
+      color: $primary-color;
     
       &:hover {
-        color: black;
+        color: $primary-color;
         background: none;
       }
     
