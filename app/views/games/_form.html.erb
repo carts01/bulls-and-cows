@@ -13,6 +13,6 @@
 
 <% else %>
 
-<p class="login-save-link hidden"><%= link_to 'Log in', login_path %> to save game</p>
+<p class="login-save-link hidden">To save your game you must be logged in. <%= link_to 'Log in', login_path %> or <%= link_to 'Sign up', register_path %>.</p>
 
 <% end %>

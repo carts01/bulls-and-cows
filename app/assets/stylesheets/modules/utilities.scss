@@ -63,3 +63,29 @@ input[type="text"].invalid {
     color: inherit;
   }
 }
+
+.terminal {
+  .h1 {
+    font-size: 36px;
+    display: block;
+    //color: #235c15;
+  }
+}
+
+.button-break {
+  margin-top: 30px;
+}
+
+.home-page__icons {
+  margin-bottom: 30px;
+
+  .svg-icon {
+    height: 72px;
+    width: 72px;
+  }
+}
+
+.instructions-link {
+  display: block;
+  margin-top: 15px;
+}

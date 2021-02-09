@@ -6,7 +6,7 @@
     <p>Username: <%= @user.username %></p>
   </div>
   <div class="user-controls--buttons">
-    <% if logged_in? && current_user == @user %>
+    <% if logged_in? && current_user == @user || current_user.admin? %>
       <%= link_to "Log out", logout_path, class: 'btn btn-default btn-ghost btn--narrow' %>
       <%= link_to "Edit your profile", edit_user_path(@user), class: 'btn btn-default btn-ghost btn--narrow' %>
       <%= link_to 'Delete your account', user_path(@user), class: "btn btn-error btn-ghost btn--narrow", method: :delete, data: { confirm: "Are you sure?"} %>
@@ -56,7 +56,7 @@
         <th>Turns</th>
         <th>Your code</th>
         <th>Comp code</th>
-        <% if logged_in? && current_user == @user %>
+        <% if current_user.admin? %>
         <th>Delete</th>
         <% end %>
       </tr>
@@ -72,7 +72,7 @@
           <td><%= game.turns %></td>
           <td><%= game.user_code %></td>
           <td><%= game.comp_code %></td>
-          <% if logged_in? && current_user == @user %>
+          <% if current_user.admin? %>
           <td><%= link_to 'X', game_path(game), class: "delete-link no-hover", method: :delete, data: { confirm: "Are you sure?"} %></td>
           <% end %>
         </tr>
