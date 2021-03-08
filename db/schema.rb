@@ -12,21 +12,21 @@
 
 ActiveRecord::Schema.define(version: 2021_02_02_021759) do
 
-  create_table "games", force: :cascade do |t|
+  create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.boolean "win", default: false
     t.boolean "draw", default: false
     t.boolean "loss", default: false
     t.integer "turns"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "level"
     t.string "user_code"
     t.string "comp_code"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "username"
