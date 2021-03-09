@@ -32,20 +32,32 @@ input[type="text"].invalid {
   margin-top: $site-padding / 2;
 }
 
+.btn.btn-large {
+  font-size: 1.8em;
+}
+
 .sign-up-message {
   margin-top: $site-padding;
 }
 
 .flash-messages {
   margin: $site-padding  0 $site-padding  0;
+  padding: 5px;
+  text-align: center;
 
   .alert {
     color: $error-color;
     font-weight: bold;
+    border: solid 1px $error-color;
+    background-color: $error-bg-color;
+    padding: 5px;
   }
   .notice {
     color: $success-color;
     font-weight: bold;
+    border: solid 1px $success-color;
+    background-color: $success-bg-color;
+    padding: 5px;
   }
 }
 
