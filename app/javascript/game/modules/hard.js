@@ -110,6 +110,8 @@ export default class Medium extends Play {
     originalArray.splice(guessIndex, 1);
  
     // Loop through the digits of the guess and check if there are any bulls and/or cows
+    let bullsFound = 0;
+
     for (let i = 0; i < guess.length; i++) {
       // If there is a bull then filter array to remove non-matching codes
         if (code[i] == guess[i]) {
@@ -121,6 +123,8 @@ export default class Medium extends Play {
   
           originalArray = filteredArray;
 
+          bullsFound += 1;
+
         } else {
           // If there isn't a bull, then loop through and check for cows
           for (let j = 0; j < guess.length; j++) {
@@ -130,10 +134,16 @@ export default class Medium extends Play {
                 // If there is a cow then filter out all codes that don't include this digit
                 // Also need to filter out codes with the cow but in the wrong position
                 let filteredArray = originalArray.filter((num) => {
-                  return (num.includes(cow) && num[j] != code[i]);
+                  return num[j] != code[i];
                 });
   
                 originalArray = filteredArray;
+
+                let filteredArrayTwo = originalArray.filter((num) => {
+                  return num.includes(cow);
+                });
+  
+                originalArray = filteredArrayTwo;
 
               } 
           }

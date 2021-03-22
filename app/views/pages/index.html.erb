@@ -1,15 +1,19 @@
-<div class="container text-center">
+<div class="container container--index text-center">
   <h1 class="h1">Welcome to Bulls and Cows</h2>
   <div class="home-page__icons">
     <%= svg 'bull' %>
     <%= svg 'sacred-cow' %>
   </div>
   <div class="home-page__buttons">
-    <%= link_to "Sign up", register_path, class: 'btn btn-default btn-ghost btn--narrow' %>
-    <%= link_to "Login", login_path, class: 'btn btn-default btn-ghost btn--narrow' %>
-    <p class="button-break">or</p>
-    <%= link_to "Play as guest", play_path, class: 'btn btn-default btn--narrow' %>
-    <%= link_to "How to play?", instructions_path, class: 'instructions-link no-hover' %>
+    <% if logged_in? %>
+      <%= link_to "Play!", play_path, class: 'btn btn-default btn-large' %>
+    <% else %>
+      <%= link_to "Sign up", register_path, class: 'btn btn-default btn-ghost btn--narrow' %>
+      <%= link_to "Login", login_path, class: 'btn btn-default btn-ghost btn--narrow' %>
+      <p class="button-break">or</p>
+      <%= link_to "Play as guest", play_path, class: 'btn btn-default btn--narrow' %>
+      <%= link_to "How to play?", instructions_path, class: 'instructions-link no-hover' %>
+    <% end %>
   </div>
 </div>
 
