@@ -55,8 +55,6 @@
     }
   }
 }
-
-// Terminal navigation
 @media only screen and (min-width: 30em) and (max-width: 50em) {
   .terminal-nav {
     flex-direction: column !important;
@@ -67,4 +65,4 @@
     flex-direction: column !important;
     align-items: flex-start !important;
   }
-}
+} 
