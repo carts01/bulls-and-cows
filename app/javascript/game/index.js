@@ -76,13 +76,13 @@ class Play {
     // Initialize and play game of selected level
     if (level == 1) {
       const easy = new Easy();
-      easy.playGame(codesArray, comp, player, computerName, playerName);
+      easy.playGame(codesArray, comp, player, computerName, (playerName !== null ? playerName.value : 'Guest'));
     } else if (level == 2) {
       const medium = new Medium();
-      medium.playGame(codesArray, comp, player, computerName, playerName);
+      medium.playGame(codesArray, comp, player, computerName, (playerName !== null ? playerName.value : 'Guest'));
     } else if (level == 3) {
       const hard = new Hard();
-      hard.playGame(codesArray, comp, player, computerName, playerName);
+      hard.playGame(codesArray, comp, player, computerName, (playerName !== null ? playerName.value : 'Guest'));
     }
 
   }

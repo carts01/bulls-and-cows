@@ -30,5 +30,11 @@
 
 .home-page__buttons {
   padding-bottom: $site-padding;
+
+  .btn--signup {
+    @media only screen and (max-width: 50em) {
+      display: none;
+    }
+  }
 }
 

@@ -8,7 +8,7 @@
     <% if logged_in? %>
       <%= link_to "Play!", play_path, class: 'btn btn-default btn-large' %>
     <% else %>
-      <%= link_to "Sign up", register_path, class: 'btn btn-default btn-ghost btn--narrow' %>
+      <%= link_to "Sign up", register_path, class: 'btn btn-default btn-ghost btn--narrow btn--signup' %>
       <%= link_to "Login", login_path, class: 'btn btn-default btn-ghost btn--narrow' %>
       <p class="button-break">or</p>
       <%= link_to "Play as guest", play_path, class: 'btn btn-default btn--narrow' %>
