@@ -15,7 +15,14 @@
 
 .results {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 50em) {
+  .results {
+    flex-direction: column;
+  }
 }
 
 .results--players, .results--comp {
@@ -31,9 +38,13 @@
 }
 
 .user-code--container {
-  margin-bottom: 15px;
+  margin-bottom: $site-padding / 2;
 }
 
 .result-container {
-  margin-bottom: 15px;
+  margin-bottom: $site-padding / 2;
+}
+
+.save-form {
+  margin-bottom: $site-padding;
 }

@@ -10,6 +10,10 @@
   }
 }
 
+.home-page__buttons {
+  padding-bottom: $site-padding;
+}
+
 .button-break {
   margin-top: $site-padding ;
 }
@@ -23,3 +27,4 @@
   display: block;
   margin-top: $site-padding / 2;
 }
+
