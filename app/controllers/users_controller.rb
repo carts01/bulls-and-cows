@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     # @users = User.all
     # Show 20 users per page and then paginate
     @users = User.paginate(:page => params[:page], :per_page => 20)
+    @sorted_users = @users.sort_by { |user| -user.games.count }
   end
 
   def show

@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody class="users__table--body">
-    <% @users.each do |user| %>
+    <% @sorted_users.each do |user| %>
       <tr class="table-row">
         <td><%= link_to user.username, user_path(user) %></td>
         <td><%= user.firstname %></td>
