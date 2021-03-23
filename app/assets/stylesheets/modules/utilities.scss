@@ -1,11 +1,13 @@
 @import 'variables';
 
+// Set width of page
 .page-width {
   max-width: $site-width;
   padding: 0 $site-padding;
   margin: 0 auto;
 }
 
+// Helper classes
 .text-center {
   text-align: center;
 }
@@ -23,6 +25,7 @@ input[type="text"].invalid {
   border-color: $error-color;
 }
 
+// Button and icon sizing
 .svg-icon {
   height: 22px;
   width: 22px;
@@ -36,6 +39,7 @@ input[type="text"].invalid {
   font-size: 1.8em;
 }
 
+// Messages/notices
 .sign-up-message {
   margin-top: $site-padding;
 }
@@ -61,6 +65,7 @@ input[type="text"].invalid {
   }
 }
 
+// Miscellaneous
 .delete-link {
   color: $error-color;
   font-weight: bold;
