@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_02_02_021759) do
 
-  create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
     t.boolean "win", default: false
     t.boolean "draw", default: false
     t.boolean "loss", default: false
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_02_02_021759) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "username"
