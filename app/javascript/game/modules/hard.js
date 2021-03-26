@@ -87,7 +87,7 @@ export default class Medium extends Play {
       // Call refineNumberSet function to check for bulls and cows and refine number set accordingly
       let afterGuess = this.refineCodesArray(this.playerCode, compGuess, this.codesArray);
       this.codesArray = afterGuess;
-      console.log(this.codesArray);
+      //console.log(this.codesArray);
   
       turns++;
       if (turns > 7) {
@@ -98,7 +98,7 @@ export default class Medium extends Play {
       }
       // Function to wait a second or so
       setTimeout(resetTurn, 1000, this.guess);
-      console.log('1000ms later');
+      // console.log('1000ms later');
     });
 
   }

@@ -51,7 +51,7 @@ export default class Play {
   }
 
   playGame(compCode, playerCode) {
-    console.log('This is overridden for each specific level');
+    // console.log('This is overridden for each specific level');
   }
 
   // Function which checks the guess against the code and returns the number of bulls

@@ -82,7 +82,7 @@ export default class Medium extends Play {
       }
       // Function to wait a second or so before new round is available to play
       setTimeout(resetTurn, 1000, this.guess);
-      console.log('1000ms later');
+      // console.log('1000ms later');
     });
 
   }

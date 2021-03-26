@@ -98,20 +98,20 @@ document.addEventListener('turbolinks:load', function() {
   const playAgain = document.querySelector(game.selectors.replay);
   const radioLevel = document.querySelectorAll(game.selectors.radioLevel);
   const codeInput = document.querySelector(game.selectors.userCode);
-  if (codeInput !== null || codeInput !== undefined) {
+  if (codeInput !== null || codeInput !== null) {
     codeInput.focus();
   }
 
   // Set pre-checked input to be equal to the last level selected
   const preferredLevel = localStorage.getItem('preferredLevel');
   if (preferredLevel == 'bruce') {
-    console.log('bruce');
+    //console.log('bruce');
     radioLevel[0].checked = true;
   } else if (preferredLevel == 'judy') {
-    console.log('judy');
+    //console.log('judy');
     radioLevel[1].checked = true;
   } else if (preferredLevel == 'lionel') {
-    console.log('lionel');
+    //console.log('lionel');
     radioLevel[2].checked = true;
   }
 
