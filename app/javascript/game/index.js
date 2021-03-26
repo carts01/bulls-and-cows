@@ -103,34 +103,38 @@ document.addEventListener('turbolinks:load', function() {
   }
 
   // Set pre-checked input to be equal to the last level selected
-  const preferredLevel = localStorage.getItem('preferredLevel');
-  if (preferredLevel == 'bruce') {
-    //console.log('bruce');
-    radioLevel[0].checked = true;
-  } else if (preferredLevel == 'judy') {
-    //console.log('judy');
-    radioLevel[1].checked = true;
-  } else if (preferredLevel == 'lionel') {
-    //console.log('lionel');
-    radioLevel[2].checked = true;
+  if (radioLevel != null || radioLevel != undefined) {
+    const preferredLevel = localStorage.getItem('preferredLevel');
+    if (preferredLevel == 'bruce') {
+      //console.log('bruce');
+      radioLevel[0].checked = true;
+    } else if (preferredLevel == 'judy') {
+      //console.log('judy');
+      radioLevel[1].checked = true;
+    } else if (preferredLevel == 'lionel') {
+      //console.log('lionel');
+      radioLevel[2].checked = true;
+    }
   }
 
   // Add event listener on initial code submission form
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    // Get selected level and user code
-    const levelCode = getRadioValue(radioLevel);
-    // Save selected level using localStorage
-    localStorage.setItem('preferredLevel', levelCode);
-    // Get user code and check it is valid - if so start game else return
-    const userCode = codeInput.value;
-    const validCode = validateCode(userCode, errorContainer, codeInput);
-    if (validCode) {
-      game.start(userCode, levelCode);
-    } else {
-      return;
-    }
-  });
+  if (form !== null) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      // Get selected level and user code
+      const levelCode = getRadioValue(radioLevel);
+      // Save selected level using localStorage
+      localStorage.setItem('preferredLevel', levelCode);
+      // Get user code and check it is valid - if so start game else return
+      const userCode = codeInput.value;
+      const validCode = validateCode(userCode, errorContainer, codeInput);
+      if (validCode) {
+        game.start(userCode, levelCode);
+      } else {
+        return;
+      }
+    });
+  }
 
   // Add event listener for playing again (this is hidden until game is complete)
   playAgain.addEventListener('click', (event) => {

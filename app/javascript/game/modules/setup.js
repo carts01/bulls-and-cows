@@ -1,7 +1,7 @@
 export default class Setup {
 
   constructor() {
-    console.log('Setup game');
+    // console.log('Setup game');
     // Get user code and pass it in constructor
   }
 
