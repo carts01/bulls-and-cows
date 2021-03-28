@@ -103,19 +103,20 @@ document.addEventListener('turbolinks:load', function() {
   }
 
   // Set pre-checked input to be equal to the last level selected
-  if (radioLevel != null || radioLevel != undefined) {
     const preferredLevel = localStorage.getItem('preferredLevel');
     if (preferredLevel == 'bruce') {
-      //console.log('bruce');
-      radioLevel[0].checked = true;
+      if (radioLevel[0] != undefined) {
+        radioLevel[0].checked = true;
+      }
     } else if (preferredLevel == 'judy') {
-      //console.log('judy');
-      radioLevel[1].checked = true;
+      if (radioLevel[1] != undefined) {
+        radioLevel[1].checked = true;
+      }
     } else if (preferredLevel == 'lionel') {
-      //console.log('lionel');
-      radioLevel[2].checked = true;
+      if (radioLevel[2] != undefined) {
+        radioLevel[2].checked = true;
+      }
     }
-  }
 
   // Add event listener on initial code submission form
   if (form !== null) {
