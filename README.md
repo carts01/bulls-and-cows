@@ -1,6 +1,6 @@
 # README
 
-https://bullsandcows.xyz
+bullsandcows.xyz
 
 **[Bulls and Cows](https://en.wikipedia.org/wiki/Bulls_and_Cows)** guessing game built using Ruby on Rails, vanilla Javascript, SCSS and PostgreSQL.
 
